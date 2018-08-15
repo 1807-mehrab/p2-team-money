@@ -5,8 +5,6 @@
  */
 package com.revature.stockinvestment.model;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author James
@@ -15,11 +13,11 @@ public class Account {
     
     private int accountId;
     private String accountType;
-    private BigDecimal balance;
+    private double balance;
     private Member member;
-    // private int shares;    this could be added if we are using a list of accounts on the company model
+    private int shares;
 
-    public int getAccountId() { 
+    public int getAccountId() {
         return accountId;
     }
 
@@ -35,11 +33,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public BigDecimal getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -50,5 +48,14 @@ public class Account {
     public void setMember(Member member) {
         this.member = member;
     }
+
+    public int getShares() {
+        return shares;
+    }
+
+    public void setShares(int shares) {
+        this.shares = shares;
+    }
+
     
 }

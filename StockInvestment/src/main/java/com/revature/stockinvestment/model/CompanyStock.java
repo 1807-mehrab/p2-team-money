@@ -5,7 +5,7 @@
  */
 package com.revature.stockinvestment.model;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -15,8 +15,8 @@ public class CompanyStock {
     
     private int companyStockId;
     private String companyName;
-    private BigDecimal stockPrice;
-    // private List<Account> accountList;     this could be used if we use the int shares in the accounts model object
+    private double stockPrice;
+    private List<Account> accountList;
 
     public int getCompanyStockId() {
         return companyStockId;
@@ -34,12 +34,20 @@ public class CompanyStock {
         this.companyName = companyName;
     }
 
-    public BigDecimal getStockPrice() {
+    public double getStockPrice() {
         return stockPrice;
     }
 
-    public void setStockPrice(BigDecimal stockPrice) {
+    public void setStockPrice(double stockPrice) {
         this.stockPrice = stockPrice;
     }
-    
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
 }
