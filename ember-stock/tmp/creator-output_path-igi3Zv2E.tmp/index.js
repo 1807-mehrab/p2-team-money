@@ -1,0 +1,1 @@
+export { default } from 'ember-stock-p2/config/environment';

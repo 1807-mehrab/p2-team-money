@@ -1,0 +1,1 @@
+/Users/vb/Desktop/p2-team-money/ember-stock-p2/tmp/funnel-input_base_path-tp7lQ4N3.tmp/lib/system.js
