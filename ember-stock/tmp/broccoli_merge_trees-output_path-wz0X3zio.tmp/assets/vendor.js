@@ -1,1 +1,0 @@
-/Users/vb/Desktop/p2-team-money/ember-stock-p2/tmp/source_map_concat-output_path-JSHarrBQ.tmp/assets/vendor.js

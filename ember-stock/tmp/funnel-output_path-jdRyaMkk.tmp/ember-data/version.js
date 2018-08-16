@@ -1,1 +1,0 @@
-/Users/vb/Desktop/p2-team-money/ember-stock-p2/tmp/creator-output_path-g6Uhun3g.tmp/version.js
