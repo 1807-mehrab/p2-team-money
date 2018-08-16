@@ -12,7 +12,6 @@ package com.revature.stockinvestment.model;
 public class Account {
     
     private int accountId;
-    private String accountType;
     private double balance;
     private Member member;
     private int shares;
@@ -23,14 +22,6 @@ public class Account {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
     }
 
     public double getBalance() {

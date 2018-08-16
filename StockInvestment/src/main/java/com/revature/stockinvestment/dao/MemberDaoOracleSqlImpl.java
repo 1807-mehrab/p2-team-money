@@ -15,27 +15,27 @@ import java.util.List;
 public class MemberDaoOracleSqlImpl implements MemberDao { 
 
     @Override
-    public void addMember(Member member) {
+    public void addMember(Member member) throws SIPersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteMember(int memberId) {
+    public void deleteMember(int memberId) throws SIPersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateMember(Member member) {
+    public void updateMember(Member member) throws SIPersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Member getMemberByMemberId(int memberId) {
+    public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Member> getAllMembers() {
+    public List<Member> getAllMembers() throws SIPersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
