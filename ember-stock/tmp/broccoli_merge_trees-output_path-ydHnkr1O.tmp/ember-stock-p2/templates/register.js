@@ -1,1 +1,0 @@
-/Users/vb/Desktop/p2-team-money/ember-stock-p2/tmp/broccoli_merge_trees-input_base_path-y4SU4yhe.tmp/1/ember-stock-p2/templates/register.js
