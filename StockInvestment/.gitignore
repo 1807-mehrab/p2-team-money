@@ -4,3 +4,5 @@
 classpath
 .classpath
 nb-configuration.xml
+target/
+bin/
