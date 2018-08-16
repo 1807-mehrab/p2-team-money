@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface AccountDao { 
     
-    public void addAccount(Account account);
+    public void addAccount(Account account) throws SIPersistenceException;
     
-    public void deleteAccount(int accountId);
+    public void deleteAccount(int accountId) throws SIPersistenceException;
     
-    public void updateAccount(Account account);
+    public void updateAccount(Account account) throws SIPersistenceException;
     
-    public Account getAccountByAccountId(int accountId);
+    public Account getAccountByAccountId(int accountId) throws SIPersistenceException;
     
-    public List<Account> getAllAccounts();
+    public List<Account> getAllAccounts() throws SIPersistenceException;
     
 }

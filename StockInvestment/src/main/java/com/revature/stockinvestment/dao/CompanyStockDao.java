@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface CompanyStockDao { 
     
-    public void addCompanyStock(CompanyStock companyStock);
+    public void addCompanyStock(CompanyStock companyStock) throws SIPersistenceException;
     
-    public void deleteCompanyStock(int companyStockId);
+    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException;
     
-    public void updateCompanyStock(CompanyStock companyStock);
+    public void updateCompanyStock(CompanyStock companyStock) throws SIPersistenceException;
     
-    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId);
+    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException;
     
-    public List<CompanyStock> getAllCompanyStocks();
+    public List<CompanyStock> getAllCompanyStocks() throws SIPersistenceException;
     
 }
