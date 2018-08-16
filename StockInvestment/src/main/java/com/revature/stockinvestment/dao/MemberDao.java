@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface MemberDao { 
     
-    public void addMember(Member member);
+    public void addMember(Member member) throws SIPersistenceException;
     
-    public void deleteMember(int memberId);
+    public void deleteMember(int memberId) throws SIPersistenceException;
     
-    public void updateMember(Member member);
+    public void updateMember(Member member) throws SIPersistenceException;
     
-    public Member getMemberByMemberId(int memberId);
+    public Member getMemberByMemberId(int memberId) throws SIPersistenceException;
     
-    public List<Member> getAllMembers();
+    public List<Member> getAllMembers() throws SIPersistenceException;
     
 }
