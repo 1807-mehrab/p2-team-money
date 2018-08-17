@@ -29,35 +29,35 @@ public class App {
         // NEED TO ALTER THE ACCOUNTDAO TO INCLUDE SHARES BEFORE MEMBER_ID
         
         MemberDao memberDao = new MemberDaoOracleSqlImpl();
-        AccountDao accountDao = new AccountDaoOracleSqlImpl();
-        CompanyStockDao companyStockDao = new CompanyStockDaoOracleSqlImpl();
+//        AccountDao accountDao = new AccountDaoOracleSqlImpl();
+//        CompanyStockDao companyStockDao = new CompanyStockDaoOracleSqlImpl();
         
         Member member = new Member();
-        member.setFirstName("Jimmy");
-        member.setLastName("D");
-        member.setEmail("fake@email.com");
-        member.setPassword("password");
+        member.setFirstName("John");
+        member.setLastName("Doe");
+        member.setEmail("test@email.com");
+        member.setPassword("test");
         
-        Account account = new Account();
-        account.setBalance(100.00);
-        account.setShares(50);
+//        Account account = new Account();
+//        account.setBalance(100.00);
+//        account.setShares(50);
         
-        List<Account> accounts = new ArrayList<>();
-        CompanyStock companyStock = new CompanyStock();
-        companyStock.setCompanyName("Apple");
-        companyStock.setStockPrice(25.00);
+//        List<Account> accounts = new ArrayList<>();
+//        CompanyStock companyStock = new CompanyStock();
+//        companyStock.setCompanyName("Apple");
+//        companyStock.setStockPrice(25.00);
         
         
         try {
-            //memberDao.addMember(member);
+            memberDao.addMember(member);
             
-            account.setMember(memberDao.getMemberByMemberId(1));
-            accountDao.addAccount(account);
-            
-            accounts.add(accountDao.getAccountByAccountId(1));
-            
-            companyStock.setAccountList(accounts);
-            companyStockDao.addCompanyStock(companyStock);
+//            account.setMember(memberDao.getMemberByMemberId(1));
+//            accountDao.addAccount(account);
+//            
+//            accounts.add(accountDao.getAccountByAccountId(1));
+//            
+//            companyStock.setAccountList(accounts);
+//            companyStockDao.addCompanyStock(companyStock);
             
         } catch (SIPersistenceException e) {
             System.out.println(e.getMessage());

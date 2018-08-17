@@ -6,3 +6,4 @@ classpath
 nb-configuration.xml
 target/
 bin/
+connection.properties
