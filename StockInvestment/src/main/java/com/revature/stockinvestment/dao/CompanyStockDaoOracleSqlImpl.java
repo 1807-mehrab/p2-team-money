@@ -15,11 +15,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author James
  */
+@Repository
 public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao { 
 
     private static final String SQL_INSERT_COMPANY_STOCK 

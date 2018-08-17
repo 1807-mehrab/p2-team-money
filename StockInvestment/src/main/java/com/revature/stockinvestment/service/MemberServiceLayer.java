@@ -5,6 +5,7 @@
  */
 package com.revature.stockinvestment.service;
 
+import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
 import java.util.List;
 
@@ -14,14 +15,14 @@ import java.util.List;
  */
 public interface MemberServiceLayer { 
     
-    public void addMember(Member member);
+    public void addMember(Member member) throws SIPersistenceException;
     
-    public void deleteMember(int memberId);
+    public void deleteMember(int memberId) throws SIPersistenceException;
     
-    public void updateMember(Member member);
+    public void updateMember(Member member) throws SIPersistenceException;
     
-    public Member getMemberByMemberId(int memberId);
+    public Member getMemberByMemberId(int memberId) throws SIPersistenceException;
     
-    public List<Member> getAllMembers();
+    public List<Member> getAllMembers() throws SIPersistenceException;
     
 }

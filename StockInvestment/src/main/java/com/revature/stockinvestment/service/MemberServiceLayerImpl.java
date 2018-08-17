@@ -5,38 +5,50 @@
  */
 package com.revature.stockinvestment.service;
 
+import com.revature.stockinvestment.dao.MemberDao;
+import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
 import java.util.List;
+import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author James
  */
+@Service
 public class MemberServiceLayerImpl implements MemberServiceLayer { 
 
+    private MemberDao memberDao;
+    
+    @Inject
+    public MemberServiceLayerImpl(MemberDao memberDao) {
+        this.memberDao = memberDao;
+    }
+    
     @Override
-    public void addMember(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addMember(Member member) throws SIPersistenceException {
+        memberDao.addMember(member);
     }
 
     @Override
-    public void deleteMember(int memberId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteMember(int memberId) throws SIPersistenceException {
+        memberDao.deleteMember(memberId);
     }
 
     @Override
-    public void updateMember(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateMember(Member member) throws SIPersistenceException {
+        memberDao.updateMember(member);
     }
 
     @Override
-    public Member getMemberByMemberId(int memberId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
+        return memberDao.getMemberByMemberId(memberId);
     }
 
     @Override
-    public List<Member> getAllMembers() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Member> getAllMembers() throws SIPersistenceException {
+        return memberDao.getAllMembers();
     }
     
 }

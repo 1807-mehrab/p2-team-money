@@ -5,18 +5,12 @@
  */
 package com.revature.stockinvestment.test;
 
-import com.revature.stockinvestment.dao.AccountDao;
-import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.CompanyStockDao;
-import com.revature.stockinvestment.dao.CompanyStockDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.MemberDao;
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
-import com.revature.stockinvestment.model.Account;
-import com.revature.stockinvestment.model.CompanyStock;
 import com.revature.stockinvestment.model.Member;
-import java.util.ArrayList;
-import java.util.List;
+import com.revature.stockinvestment.service.MemberServiceLayer;
+import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 
 /**
  *
@@ -27,15 +21,15 @@ public class App {
     public static void main(String[] args) {
         
         // NEED TO ALTER THE ACCOUNTDAO TO INCLUDE SHARES BEFORE MEMBER_ID
-        
         MemberDao memberDao = new MemberDaoOracleSqlImpl();
+        MemberServiceLayer memberServiceLayer = new MemberServiceLayerImpl(memberDao);
 //        AccountDao accountDao = new AccountDaoOracleSqlImpl();
 //        CompanyStockDao companyStockDao = new CompanyStockDaoOracleSqlImpl();
         
         Member member = new Member();
-        member.setFirstName("John");
-        member.setLastName("Doe");
-        member.setEmail("test@email.com");
+        member.setFirstName("Joe");
+        member.setLastName("Smith");
+        member.setEmail("test2@email.com");
         member.setPassword("test");
         
 //        Account account = new Account();
@@ -49,7 +43,7 @@ public class App {
         
         
         try {
-            memberDao.addMember(member);
+            memberServiceLayer.addMember(member);
             
 //            account.setMember(memberDao.getMemberByMemberId(1));
 //            accountDao.addAccount(account);

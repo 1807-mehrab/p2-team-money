@@ -5,6 +5,7 @@
  */
 package com.revature.stockinvestment.service;
 
+import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.CompanyStock;
 import java.util.List;
 
@@ -14,14 +15,14 @@ import java.util.List;
  */
 public interface CompanyStockServiceLayer { 
     
-    public void addCompanyStock(CompanyStock companyStock);
+    public void addCompanyStock(CompanyStock companyStock) throws SIPersistenceException;
     
-    public void deleteCompanyStock(int companyStockId);
+    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException;
     
-    public void updateCompanyStock(CompanyStock companyStock);
+    public void updateCompanyStock(CompanyStock companyStock) throws SIPersistenceException;
     
-    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId);
+    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException;
     
-    public List<CompanyStock> getAllCompanyStocks();
+    public List<CompanyStock> getAllCompanyStocks() throws SIPersistenceException;
     
 }
