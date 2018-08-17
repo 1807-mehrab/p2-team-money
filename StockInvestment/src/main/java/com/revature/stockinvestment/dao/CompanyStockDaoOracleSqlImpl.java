@@ -23,7 +23,11 @@ import java.util.List;
 public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao { 
 
     private static final String SQL_INSERT_COMPANY_STOCK 
-            = "INSERT INTO COMPANY_STOCK (COMPANY_NAME, STOCK_PRICE, ACCOUNT_ID) "
+            = "INSERT INTO COMPANY_STOCK (COMPANY_NAME, STOCK_PRICE) "
+            + "VALUES (?, ?)";
+    
+    private static final String SQL_INSERT_COMPANY_STOCK_ACCOUNTS 
+            = "INSERT INTO STOCK_SHARES (SHARES, ACCOUNT_ID, COMPANY_STOCK_ID) "
             + "VALUES (?, ?, ?)";
     
     private static final String SQL_DELETE_COMPANY_STOCK 
@@ -32,7 +36,7 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
     
     private static final String SQL_UPDATE_COMPANY_STOCK 
             = "UPDATE COMPANY_STOCK "
-            + "SET COMPANY_NAME = ?, STOCK_PRICE = ?, ACCOUNT_ID = ? "
+            + "SET COMPANY_NAME = ?, STOCK_PRICE = ? "
             + "WHERE COMPANY_STOCK_ID = ?";
     
     private static final String SQL_SELECT_COMPANY_STOCK_BY_COMPANY_STOCK_ID 
@@ -51,12 +55,10 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
 
         try (Connection conn = ConnectionUtil.getConnection()) {
             ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK);
-            for (Account account : companyStock.getAccountList()) {
-                ps.setString(1, companyStock.getCompanyName());
-                ps.setDouble(2, companyStock.getStockPrice());
-                ps.setInt(3, account.getAccountId());
-                rs = ps.executeQuery();
-            }
+            ps.setString(1, companyStock.getCompanyName());
+            ps.setDouble(2, companyStock.getStockPrice());
+            rs = ps.executeQuery();
+            insertCompanyStockAccounts(companyStock);
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
         } catch (IOException e) {
@@ -109,13 +111,10 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
 
         try (Connection conn = ConnectionUtil.getConnection()) {
             ps = conn.prepareStatement(SQL_UPDATE_COMPANY_STOCK);
-            for (Account account : companyStock.getAccountList()) {
-                ps.setString(1, companyStock.getCompanyName());
-                ps.setDouble(2, companyStock.getStockPrice());
-                ps.setInt(3, account.getAccountId());
-                ps.setInt(4, companyStock.getCompanyStockId());
-                rs = ps.executeQuery();
-            }
+            ps.setString(1, companyStock.getCompanyName());
+            ps.setDouble(2, companyStock.getStockPrice());
+            ps.setInt(3, companyStock.getCompanyStockId());
+            rs = ps.executeQuery();
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
         } catch (IOException e) {
@@ -203,6 +202,38 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
             }
         }
         return companyStocks;
+    }
+    
+    private void insertCompanyStockAccounts(CompanyStock companyStock) throws SIPersistenceException {
+        final int companyStockId = companyStock.getCompanyStockId();
+        final List<Account> accounts = companyStock.getAccountList();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try (Connection conn = ConnectionUtil.getConnection()) {
+            ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK_ACCOUNTS);
+            for (Account account : accounts) {
+                ps.setInt(1, account.getShares());
+                ps.setInt(2, account.getAccountId());
+                ps.setInt(3, companyStockId);
+                rs = ps.executeQuery();
+            }
+        } catch (SQLException e) {
+            throw new SIPersistenceException("Could not connect to db.", e);
+        } catch (IOException e) {
+            throw new SIPersistenceException("Could not read from db.", e);
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                throw new SIPersistenceException("Could not close db.", e);
+            }
+        }
     }
     
 }
