@@ -5,18 +5,14 @@
  */
 package com.revature.stockinvestment.model;
 
-import java.util.List;
-
 /**
  *
  * @author James
  */
-public class CompanyStock { 
+public class Company { 
     
     private int companyStockId;
     private String companyName;
-    private double stockPrice;
-    private List<Account> accountList;
 
     public int getCompanyStockId() {
         return companyStockId;
@@ -32,22 +28,6 @@ public class CompanyStock {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public double getStockPrice() {
-        return stockPrice;
-    }
-
-    public void setStockPrice(double stockPrice) {
-        this.stockPrice = stockPrice;
-    }
-
-    public List<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
     }
 
 }

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
 public class AccountDaoOracleSqlImpl implements AccountDao { 
 
     private static final String SQL_INSERT_ACCOUNT 
-            = "INSERT INTO ACCOUNT (BALANCE, SHARES, MEMBER_ID) "
+            = "INSERT INTO ACCOUNT (BALANCE, MEMBER_ID) "
             + "VALUES (?, ?, ?)";
     
     private static final String SQL_DELETE_ACCOUNT 
@@ -33,16 +33,16 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     
     private static final String SQL_UPDATE_ACCOUNT 
             = "UPDATE ACCOUNT "
-            + "SET BALANCE = ?, SHARES = ?, MEMBER_ID = ? "
+            + "SET BALANCE = ?, MEMBER_ID = ? "
             + "WHERE ACCOUNT_ID = ?";
     
     private static final String SQL_SELECT_ACCOUNT_BY_ACCOUNT_ID 
-            = "SELECT ACCOUNT_ID, BALANCE, SHARES "
+            = "SELECT ACCOUNT_ID, BALANCE "
             + "FROM ACCOUNT "
             + "WHERE ACCOUNT_ID = ?";
     
     private static final String SQL_SELECT_ALL_ACCOUNTS 
-            = "SELECT ACCOUNT_ID, BALANCE, SHARES "
+            = "SELECT ACCOUNT_ID, BALANCE "
             + "FROM ACCOUNT";
     
     @Override
@@ -53,8 +53,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         try (Connection conn = ConnectionUtil.getConnection()) {
             ps = conn.prepareStatement(SQL_INSERT_ACCOUNT);
             ps.setDouble(1, account.getBalance());
-            ps.setInt(2, account.getShares());
-            ps.setInt(3, account.getMember().getMemberId());
+            ps.setInt(2, account.getMember().getMemberId());
             rs = ps.executeQuery();
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
@@ -109,9 +108,8 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         try (Connection conn = ConnectionUtil.getConnection()) {
             ps = conn.prepareStatement(SQL_UPDATE_ACCOUNT);
             ps.setDouble(1, account.getBalance());
-            ps.setInt(2, account.getShares());
-            ps.setInt(3, account.getMember().getMemberId());
-            ps.setInt(4, account.getAccountId());
+            ps.setInt(2, account.getMember().getMemberId());
+            ps.setInt(3, account.getAccountId());
             rs = ps.executeQuery();
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
@@ -145,7 +143,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
                 account = new Account();
                 account.setAccountId(rs.getInt("ACCOUNT_ID"));
                 account.setBalance(rs.getDouble("BALANCE"));
-                account.setShares(rs.getInt("SHARES"));
             }
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
@@ -180,7 +177,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
                 account = new Account();
                 account.setAccountId(rs.getInt("ACCOUNT_ID"));
                 account.setBalance(rs.getDouble("BALANCE"));
-                account.setShares(rs.getInt("SHARES"));
                 accounts.add(account);
             }
         } catch (SQLException e) {

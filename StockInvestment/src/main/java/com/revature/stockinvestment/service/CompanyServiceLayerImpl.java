@@ -5,29 +5,29 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.CompanyStockDao;
 import com.revature.stockinvestment.dao.SIPersistenceException;
-import com.revature.stockinvestment.model.CompanyStock;
+import com.revature.stockinvestment.model.Company;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
+import com.revature.stockinvestment.dao.CompanyDao;
 
 /**
  *
  * @author James
  */
 @Service
-public class CompanyStockServiceLayerImpl implements CompanyStockServiceLayer { 
+public class CompanyServiceLayerImpl implements CompanyServiceLayer { 
 
-    private CompanyStockDao companyStockDao;
+    private CompanyDao companyStockDao;
     
     @Inject
-    public CompanyStockServiceLayerImpl(CompanyStockDao companyStockDao) {
+    public CompanyServiceLayerImpl(CompanyDao companyStockDao) {
         this.companyStockDao = companyStockDao;
     }
     
     @Override
-    public void addCompanyStock(CompanyStock companyStock) throws SIPersistenceException {
+    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
         companyStockDao.addCompanyStock(companyStock);
     }
 
@@ -37,17 +37,17 @@ public class CompanyStockServiceLayerImpl implements CompanyStockServiceLayer {
     }
 
     @Override
-    public void updateCompanyStock(CompanyStock companyStock) throws SIPersistenceException {
+    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
         companyStockDao.updateCompanyStock(companyStock);
     }
 
     @Override
-    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
         return companyStockDao.getCompanyStockByCompanyStockId(companyStockId);
     }
 
     @Override
-    public List<CompanyStock> getAllCompanyStocks() throws SIPersistenceException {
+    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
         return companyStockDao.getAllCompanyStocks();
     }
     

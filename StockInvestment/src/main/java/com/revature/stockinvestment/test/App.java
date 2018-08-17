@@ -7,22 +7,22 @@ package com.revature.stockinvestment.test;
 
 import com.revature.stockinvestment.dao.AccountDao;
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.CompanyStockDao;
-import com.revature.stockinvestment.dao.CompanyStockDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.MemberDao;
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
-import com.revature.stockinvestment.model.CompanyStock;
+import com.revature.stockinvestment.model.Company;
 import com.revature.stockinvestment.model.Member;
 import com.revature.stockinvestment.service.AccountServiceLayer;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
-import com.revature.stockinvestment.service.CompanyStockServiceLayer;
-import com.revature.stockinvestment.service.CompanyStockServiceLayerImpl;
+import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
 import com.revature.stockinvestment.service.MemberServiceLayer;
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import java.util.ArrayList;
 import java.util.List;
+import com.revature.stockinvestment.dao.CompanyDao;
+import com.revature.stockinvestment.service.CompanyServiceLayer;
 
 /**
  *
@@ -38,8 +38,8 @@ public class App {
         AccountDao accountDao = new AccountDaoOracleSqlImpl();
         AccountServiceLayer accountServiceLayer = new AccountServiceLayerImpl(accountDao);
         
-        CompanyStockDao companyStockDao = new CompanyStockDaoOracleSqlImpl();
-        CompanyStockServiceLayer companyStockServiceLayer = new CompanyStockServiceLayerImpl(companyStockDao);
+        CompanyDao companyStockDao = new CompanyDaoOracleSqlImpl();
+        CompanyServiceLayer companyStockServiceLayer = new CompanyServiceLayerImpl(companyStockDao);
         
         Member member = new Member();
         member.setFirstName("Joe");
@@ -49,12 +49,10 @@ public class App {
         
         Account account = new Account();
         account.setBalance(100.00);
-        account.setShares(50);
         
         List<Account> accounts = new ArrayList<>();
-        CompanyStock companyStock = new CompanyStock();
+        Company companyStock = new Company();
         companyStock.setCompanyName("Apple");
-        companyStock.setStockPrice(25.00);
         
         
         try {
@@ -65,7 +63,6 @@ public class App {
             
             accounts.add(accountDao.getAccountByAccountId(1));
             
-            companyStock.setAccountList(accounts);
             companyStockDao.addCompanyStock(companyStock);
             
         } catch (SIPersistenceException e) {

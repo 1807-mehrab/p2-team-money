@@ -14,7 +14,6 @@ public class Account {
     private int accountId;
     private double balance;
     private Member member;
-    private int shares;
 
     public int getAccountId() {
         return accountId;
@@ -39,14 +38,5 @@ public class Account {
     public void setMember(Member member) {
         this.member = member;
     }
-
-    public int getShares() {
-        return shares;
-    }
-
-    public void setShares(int shares) {
-        this.shares = shares;
-    }
-
     
 }

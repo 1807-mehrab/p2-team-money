@@ -6,7 +6,7 @@
 package com.revature.stockinvestment.dao;
 
 import com.revature.stockinvestment.model.Account;
-import com.revature.stockinvestment.model.CompanyStock;
+import com.revature.stockinvestment.model.Company;
 import com.revature.stockinvestment.util.ConnectionUtil;
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,45 +22,44 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
-public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao { 
+public class CompanyDaoOracleSqlImpl implements CompanyDao { 
 
-    private static final String SQL_INSERT_COMPANY_STOCK 
-            = "INSERT INTO COMPANY_STOCK (COMPANY_NAME, STOCK_PRICE) "
+    private static final String SQL_INSERT_COMPANY 
+            = "INSERT INTO COMPANY (COMPANY_NAME) "
             + "VALUES (?, ?)";
     
-    private static final String SQL_INSERT_COMPANY_STOCK_ACCOUNTS 
-            = "INSERT INTO STOCK_SHARES (SHARES, ACCOUNT_ID, COMPANY_STOCK_ID) "
+    private static final String SQL_INSERT_COMPANY_ACCOUNTS 
+            = "INSERT INTO TRANSACTION (SHARES, ACCOUNT_ID, COMPANY_ID) "
             + "VALUES (?, ?, ?)";
     
-    private static final String SQL_DELETE_COMPANY_STOCK 
-            = "DELETE FROM COMPANY_STOCK "
-            + "WHERE COMPANY_STOCK_ID = ?"; 
+    private static final String SQL_DELETE_COMPANY 
+            = "DELETE FROM COMPANY "
+            + "WHERE COMPANY_ID = ?"; 
     
-    private static final String SQL_UPDATE_COMPANY_STOCK 
-            = "UPDATE COMPANY_STOCK "
-            + "SET COMPANY_NAME = ?, STOCK_PRICE = ? "
-            + "WHERE COMPANY_STOCK_ID = ?";
+    private static final String SQL_UPDATE_COMPANY 
+            = "UPDATE COMPANY "
+            + "SET COMPANY_NAME = ? "
+            + "WHERE COMPANY_ID = ?";
     
-    private static final String SQL_SELECT_COMPANY_STOCK_BY_COMPANY_STOCK_ID 
-            = "SELECT COMPANY_STOCK_ID, COMPANY_NAME, STOCK_PRICE "
-            + "FROM COMPANY_STOCK "
-            + "WHERE COMPANY_STOCK_ID = ?";
+    private static final String SQL_SELECT_COMPANY_BY_COMPANY_ID 
+            = "SELECT COMPANY_ID, COMPANY_NAME "
+            + "FROM COMPANY "
+            + "WHERE COMPANY_ID = ?";
     
-    private static final String SQL_SELECT_ALL_COMPANY_STOCKS 
-            = "SELECT COMPANY_STOCK_ID, COMPANY_NAME, STOCK_PRICE "
-            + "FROM COMPANY_STOCK";
+    private static final String SQL_SELECT_ALL_COMPANIES 
+            = "SELECT COMPANY_ID, COMPANY_NAME "
+            + "FROM COMPANY";
     
     @Override
-    public void addCompanyStock(CompanyStock companyStock) throws SIPersistenceException {
+    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK);
+            ps = conn.prepareStatement(SQL_INSERT_COMPANY);
             ps.setString(1, companyStock.getCompanyName());
-            ps.setDouble(2, companyStock.getStockPrice());
             rs = ps.executeQuery();
-            insertCompanyStockAccounts(companyStock);
+            //insertCompanyStockAccounts(companyStock);
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
         } catch (IOException e) {
@@ -85,7 +84,7 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_DELETE_COMPANY_STOCK);
+            ps = conn.prepareStatement(SQL_DELETE_COMPANY);
             ps.setInt(1, companyStockId);
             rs = ps.executeQuery();
         } catch (SQLException e) {
@@ -107,15 +106,14 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
     }
 
     @Override
-    public void updateCompanyStock(CompanyStock companyStock) throws SIPersistenceException {
+    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_UPDATE_COMPANY_STOCK);
+            ps = conn.prepareStatement(SQL_UPDATE_COMPANY);
             ps.setString(1, companyStock.getCompanyName());
-            ps.setDouble(2, companyStock.getStockPrice());
-            ps.setInt(3, companyStock.getCompanyStockId());
+            ps.setInt(2, companyStock.getCompanyStockId());
             rs = ps.executeQuery();
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
@@ -136,20 +134,19 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
     }
 
     @Override
-    public CompanyStock getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        CompanyStock companyStock = null;
+        Company companyStock = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_SELECT_COMPANY_STOCK_BY_COMPANY_STOCK_ID);
+            ps = conn.prepareStatement(SQL_SELECT_COMPANY_BY_COMPANY_ID);
             ps.setInt(1, companyStockId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                companyStock = new CompanyStock();
+                companyStock = new Company();
                 companyStock.setCompanyStockId(rs.getInt("COMPANY_STOCK_ID"));
                 companyStock.setCompanyName(rs.getString("COMPANY_NAME"));
-                companyStock.setStockPrice(rs.getDouble("STOCK_PRICE"));
             }
         } catch (SQLException e) {
             throw new SIPersistenceException("Could not connect to db.", e);
@@ -171,20 +168,19 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
     }
 
     @Override
-    public List<CompanyStock> getAllCompanyStocks() throws SIPersistenceException {
+    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        CompanyStock companyStock = null;
-        List<CompanyStock> companyStocks = new ArrayList<>();
+        Company companyStock = null;
+        List<Company> companyStocks = new ArrayList<>();
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_SELECT_ALL_COMPANY_STOCKS);
+            ps = conn.prepareStatement(SQL_SELECT_ALL_COMPANIES);
             rs = ps.executeQuery();
             while (rs.next()) {
-                companyStock = new CompanyStock();
+                companyStock = new Company();
                 companyStock.setCompanyStockId(rs.getInt("COMPANY_STOCK_ID"));
                 companyStock.setCompanyName(rs.getString("COMPANY_NAME"));
-                companyStock.setStockPrice(rs.getDouble("STOCK_PRICE"));
                 companyStocks.add(companyStock);
             }
         } catch (SQLException e) {
@@ -206,36 +202,36 @@ public class CompanyStockDaoOracleSqlImpl implements CompanyStockDao {
         return companyStocks;
     }
     
-    private void insertCompanyStockAccounts(CompanyStock companyStock) throws SIPersistenceException {
-        final int companyStockId = companyStock.getCompanyStockId();
-        final List<Account> accounts = companyStock.getAccountList();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        
-        try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK_ACCOUNTS);
-            for (Account account : accounts) {
-                ps.setInt(1, account.getShares());
-                ps.setInt(2, account.getAccountId());
-                ps.setInt(3, companyStockId);
-                rs = ps.executeQuery();
-            }
-        } catch (SQLException e) {
-            throw new SIPersistenceException("Could not connect to db.", e);
-        } catch (IOException e) {
-            throw new SIPersistenceException("Could not read from db.", e);
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new SIPersistenceException("Could not close db.", e);
-            }
-        }
-    }
+//    private void insertCompanyStockAccounts(Company companyStock) throws SIPersistenceException {
+//        final int companyStockId = companyStock.getCompanyStockId();
+//        final List<Account> accounts = companyStock.getAccountList();
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        
+//        try (Connection conn = ConnectionUtil.getConnection()) {
+//            ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK_ACCOUNTS);
+//            for (Account account : accounts) {
+//                ps.setInt(1, account.getShares());
+//                ps.setInt(2, account.getAccountId());
+//                ps.setInt(3, companyStockId);
+//                rs = ps.executeQuery();
+//            }
+//        } catch (SQLException e) {
+//            throw new SIPersistenceException("Could not connect to db.", e);
+//        } catch (IOException e) {
+//            throw new SIPersistenceException("Could not read from db.", e);
+//        } finally {
+//            try {
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//            } catch (SQLException e) {
+//                throw new SIPersistenceException("Could not close db.", e);
+//            }
+//        }
+//    }
     
 }
