@@ -15,6 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CompanyDaoOracleSqlImpl implements CompanyDao { 
 
+	/*
     private static final String SQL_INSERT_COMPANY 
             = "INSERT INTO COMPANY (COMPANY_NAME) "
             + "VALUES (?, ?)";
@@ -49,10 +54,25 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
     private static final String SQL_SELECT_ALL_COMPANIES 
             = "SELECT COMPANY_ID, COMPANY_NAME "
             + "FROM COMPANY";
+    */
+    
+    //***************************************
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	//***************************************
     
     @Override
     public void addCompanyStock(Company companyStock) throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Session s = sessionFactory.getCurrentSession();
+        Transaction t = s.beginTransaction();
+        s.save(companyStock);
+        t.commit();
+        
+    	/*
+    	PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
@@ -75,11 +95,17 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
+        Session s = sessionFactory.getCurrentSession();
+        Transaction t = s.beginTransaction();
+        s.delete(companyStock);
+        t.commit();
+    	
+    	/*
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -102,11 +128,16 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
+        Session s = sessionFactory.getCurrentSession();
+        Transaction t = s.beginTransaction();
+        s.save(companyStock);
+        t.commit();
+    	/*
         PreparedStatement ps = null;
         ResultSet rs = null;
 
@@ -130,11 +161,25 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+        Company c = null;
+        List<Company> companies = new ArrayList<Company>();
+        Session s = sessionFactory.getCurrentSession();
+        
+        companies = s.createQuery("from Company where company_id = :cId")
+        		.setInteger("cId", companyStockId).list();
+        
+        if(!companies.isEmpty()) {
+        	c = companies.get(0);
+        }
+        
+        return c;
+    	
+    	/*
         PreparedStatement ps = null;
         ResultSet rs = null;
         Company companyStock = null;
@@ -164,11 +209,16 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
                 throw new SIPersistenceException("Could not close db.", e);
             }
         }
-        return companyStock;
+        return companyStock;*/
     }
 
     @Override
     public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+        Session s = sessionFactory.getCurrentSession();
+        return s.createQuery("from company").list();
+        
+        
+    	/*
         PreparedStatement ps = null;
         ResultSet rs = null;
         Company companyStock = null;
@@ -199,7 +249,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
                 throw new SIPersistenceException("Could not close db.", e);
             }
         }
-        return companyStocks;
+        return companyStocks;*/
     }
     
 //    private void insertCompanyStockAccounts(Company companyStock) throws SIPersistenceException {

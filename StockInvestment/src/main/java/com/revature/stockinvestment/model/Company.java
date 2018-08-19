@@ -5,13 +5,22 @@
  */
 package com.revature.stockinvestment.model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author James
  */
+@Entity
+@Table
 public class Company { 
-    
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="comSeq")
+    @SequenceGenerator(allocationSize=1, name="comSeq", sequenceName="SQ_COMPANY_PK")
+    @Column(name="COMPANY_ID")
     private int companyStockId;
+    
+    @Column(name="COMPANY_NAME")
     private String companyName;
 
     public int getCompanyStockId() {

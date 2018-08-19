@@ -5,16 +5,31 @@
  */
 package com.revature.stockinvestment.model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author James
  */
+@Entity
+@Table
 public class Member {
-    
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="memSeq")
+    @SequenceGenerator(allocationSize=1, name="memSeq", sequenceName="SQ_MEMBER_PK")
+    @Column(name="MEMBER_ID")
     private int memberId;
+    
+    @Column(name="FIRST_NAME")
     private String firstName;
+    
+    @Column(name="LAST_NAME")
     private String lastName;
+    
+    @Column(name="EMAIL")
     private String email;
+    
+    @Column(name="PASSWORD")
     private String password;
 
     public int getMemberId() { 

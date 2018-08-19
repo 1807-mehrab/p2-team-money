@@ -5,14 +5,30 @@
  */
 package com.revature.stockinvestment.model;
 
+import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  *
  * @author James
  */
+@Entity
+@Table
 public class Account {
     
+	@Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="accSeq")
+    @SequenceGenerator(allocationSize=1, name="accSeq", sequenceName="SQ_ACCOUNT_PK")
+	@Column(name="ACCOUNT_ID")
     private int accountId;
+	
+	@Column(name="BALANCE")
     private double balance;
+	
+	@Autowired
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn
     private Member member;
 
     public int getAccountId() {

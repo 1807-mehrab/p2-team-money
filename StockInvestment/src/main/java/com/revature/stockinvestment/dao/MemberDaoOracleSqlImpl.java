@@ -14,6 +14,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -22,7 +26,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class MemberDaoOracleSqlImpl implements MemberDao { 
-
+/*
     private static final String SQL_INSERT_MEMBER 
             = "INSERT INTO MEMBER (FIRST_NAME, LAST_NAME, EMAIL, PASSWORD) "
             + "VALUES (?, ?, ?, ?)";
@@ -44,10 +48,26 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     private static final String SQL_SELECT_ALL_MEMBERS 
             = "SELECT MEMBER_ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD "
             + "FROM MEMBER";
+*/
+	
+    //***************************************
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	//***************************************
     
     @Override
     public void addMember(Member member) throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Session s = sessionFactory.getCurrentSession();
+        Transaction tx = s.beginTransaction();
+        s.save(member);
+        tx.commit();
+
+
+    	
+    	/*PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
@@ -72,12 +92,18 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public void deleteMember(int memberId) throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Session s = sessionFactory.getCurrentSession();
+        Transaction t = s.beginTransaction();
+        s.delete(member);
+        t.commit();
+    	
+    	/*
+    	PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
@@ -99,12 +125,18 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public void updateMember(Member member) throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Session s = sessionFactory.getCurrentSession();
+        Transaction t = s.beginTransaction();
+        s.update(member);
+        t.commit();
+        
+    	/*
+    	PreparedStatement ps = null;
         ResultSet rs = null;
 
         try (Connection conn = ConnectionUtil.getConnection()) {
@@ -130,12 +162,23 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
             } catch (SQLException e) {
                 throw new SIPersistenceException("Could not close db.", e);
             }
-        }
+        }*/
     }
 
     @Override
     public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Member m = null;
+        List<Member> members = new ArrayList<Member>();
+        Session s = sessionFactory.getCurrentSession();
+        members = s.createQuery("from Member where member_id = :idVar")
+        		.setInteger("idVar", memberId).list();
+        if(!members.isEmpty()) {
+        	m = members.get(0);
+        }
+        return m;
+        
+    	/*
+    	PreparedStatement ps = null;
         ResultSet rs = null;
         Member member = null;
 
@@ -167,12 +210,16 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
                 throw new SIPersistenceException("Could not close db.", e);
             }
         }
-        return member;
+        return member;*/
     }
 
     @Override
     public List<Member> getAllMembers() throws SIPersistenceException {
-        PreparedStatement ps = null;
+        Session s = sessionFactory.getCurrentSession();
+        return s.createQuery("from Member").list();
+             		
+    	/*
+    	PreparedStatement ps = null;
         ResultSet rs = null;
         Member member = null;
         List<Member> members = new ArrayList<>();
@@ -206,6 +253,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
             }
         }
         return members;
+        */
     }
     
 }

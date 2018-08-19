@@ -5,16 +5,37 @@
  */
 package com.revature.stockinvestment.model;
 
+import javax.persistence.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  *
  * @author James
  */
+@Entity
+@Table
 public class Transaction {
-    
+    @Id
+    @Column(name="TRANSACTION_ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="tranSeq")
+    @SequenceGenerator(allocationSize=1, name="tranSeq", sequenceName="SQ_TRANSACTION_PK")
     private int transactionId;
+    
+    @Column(name="SHARES")
     private int shares;
+    
+    @Column(name="PURCHASE_PRICE")
     private double purchasePrice;
+    
+    @Autowired
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="TRANSACTION_ACCOUNT")
     private Account account;
+    
+    @Autowired
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="TRANSACTION_COMPANY")
     private Company company;
 
     public int getTransactionId() {
