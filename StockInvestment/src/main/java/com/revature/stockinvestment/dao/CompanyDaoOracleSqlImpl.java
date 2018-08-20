@@ -100,35 +100,11 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
 
     @Override
     public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-        Session s = sessionFactory.getCurrentSession();
+        Company companyStock = getCompanyStockByCompanyStockId(companyStockId);
+    	Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.delete(companyStock);
         t.commit();
-    	
-    	/*
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-        try (Connection conn = ConnectionUtil.getConnection()) {
-            ps = conn.prepareStatement(SQL_DELETE_COMPANY);
-            ps.setInt(1, companyStockId);
-            rs = ps.executeQuery();
-        } catch (SQLException e) {
-            throw new SIPersistenceException("Could not connect to db.", e);
-        } catch (IOException e) {
-            throw new SIPersistenceException("Could not write to db.", e);
-        } finally {
-            try {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (rs != null) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new SIPersistenceException("Could not close db.", e);
-            }
-        }*/
     }
 
     @Override
@@ -252,36 +228,5 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         return companyStocks;*/
     }
     
-//    private void insertCompanyStockAccounts(Company companyStock) throws SIPersistenceException {
-//        final int companyStockId = companyStock.getCompanyStockId();
-//        final List<Account> accounts = companyStock.getAccountList();
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        
-//        try (Connection conn = ConnectionUtil.getConnection()) {
-//            ps = conn.prepareStatement(SQL_INSERT_COMPANY_STOCK_ACCOUNTS);
-//            for (Account account : accounts) {
-//                ps.setInt(1, account.getShares());
-//                ps.setInt(2, account.getAccountId());
-//                ps.setInt(3, companyStockId);
-//                rs = ps.executeQuery();
-//            }
-//        } catch (SQLException e) {
-//            throw new SIPersistenceException("Could not connect to db.", e);
-//        } catch (IOException e) {
-//            throw new SIPersistenceException("Could not read from db.", e);
-//        } finally {
-//            try {
-//                if (ps != null) {
-//                    ps.close();
-//                }
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//            } catch (SQLException e) {
-//                throw new SIPersistenceException("Could not close db.", e);
-//            }
-//        }
-//    }
     
 }
