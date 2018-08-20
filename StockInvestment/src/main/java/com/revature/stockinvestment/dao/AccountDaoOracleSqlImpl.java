@@ -93,6 +93,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
 
     @Override
     public void deleteAccount(int accountId) throws SIPersistenceException {
+    	Account account = getAccountByAccountId(accountId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.delete(account);
