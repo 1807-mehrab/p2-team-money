@@ -23,7 +23,7 @@
         </dependency>
         
         <dependency>
-            <groupId>com.revature.stockinvestment</groupId>
+            <groupId>com.oracle.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>
             <version>12.0.1</version>
         </dependency>
@@ -51,6 +51,19 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.11.Final</version>
         </dependency>
+        
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-webmvc</artifactId>
+        	<version>4.3.10.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+        	<groupId>com.fasterxml.jackson.core</groupId>
+        	<artifactId>jackson-databind</artifactId>
+        	<version>2.9.6</version>
+        </dependency>
+        
     </dependencies>
 
     <build>
