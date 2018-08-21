@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.MemberDao;
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
+import com.revature.stockinvestment.service.MemberServiceLayer;
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 
@@ -120,10 +122,8 @@ public class HibernateConfig {
 	}
 	
 	@Bean
-	public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
-		MemberServiceLayerImpl ms = new MemberServiceLayerImpl();
-		ms.setDao(memberDao);
-		return ms;
+	public MemberServiceLayer memberService(MemberDao memberDao) {
+		return new MemberServiceLayerImpl(memberDao);
 	}
 	
 	//***********************/
