@@ -39,6 +39,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
 
     @Override
     public void deleteTransaction(int transactionId) throws SIPersistenceException {
+    	Transaction transaction = getTransactionByTransactionId(transactionId);
     	Session s = sessionFactory.getCurrentSession();
     	org.hibernate.Transaction t = s.beginTransaction();
     	s.delete(transaction);

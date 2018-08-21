@@ -18,8 +18,10 @@ public class TransactionController {
     
     private TransactionServiceLayer transactionServiceLayer;
     
-    @Inject
-    public TransactionController(TransactionServiceLayer transactionServiceLayer) {
-        this.transactionServiceLayer = transactionServiceLayer;
-    }
+    
+    
+//    @Inject
+//    public TransactionController(TransactionServiceLayer transactionServiceLayer) {
+//        this.transactionServiceLayer = transactionServiceLayer;
+//    }
 }
