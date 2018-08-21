@@ -17,38 +17,41 @@ import com.revature.stockinvestment.dao.CompanyDao;
  * @author James
  */
 @Service
-public class CompanyServiceLayerImpl implements CompanyServiceLayer { 
+public class CompanyServiceLayerImpl { 
 
-    private CompanyDao companyStockDao;
-    
-    @Inject
-    public CompanyServiceLayerImpl(CompanyDao companyStockDao) {
-        this.companyStockDao = companyStockDao;
-    }
-    
-    @Override
-    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
-        companyStockDao.addCompanyStock(companyStock);
-    }
+    @Autowired
+	CompanyDaoOracleSqlImpl dao;
 
-    @Override
-    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-        companyStockDao.deleteCompanyStock(companyStockId);
-    }
+	public void setDao(CompanyDaoOracleSqlImpl dao) {
+		this.dao = dao;
+	}
+	
+	@Transactional
+	public void addCompanyStock(Company companyStock) throws SIPersistenceException {
+		dao.addCompanyStock(companyStock);
+		
+	}
 
-    @Override
-    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
-        companyStockDao.updateCompanyStock(companyStock);
-    }
+	@Transactional
+	public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
+		dao.deleteCompanyStock(companyStockId);
+		
+	}
 
-    @Override
-    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
-        return companyStockDao.getCompanyStockByCompanyStockId(companyStockId);
-    }
+	@Transactional
+	public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
+		dao.updateCompanyStock(companyStock);
+		
+	}
 
-    @Override
-    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
-        return companyStockDao.getAllCompanyStocks();
-    }
+	@Transactional
+	public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+		return dao.getCompanyStockByCompanyStockId(companyStockId);
+	}
+
+	@Transactional
+	public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+		return dao.getAllCompanyStocks();
+	}
     
 }
