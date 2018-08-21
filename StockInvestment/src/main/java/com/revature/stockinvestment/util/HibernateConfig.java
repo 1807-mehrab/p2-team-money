@@ -115,10 +115,8 @@ public class HibernateConfig {
 	// Member
 	//***********************/
 	@Bean
-	public MemberDaoOracleSqlImpl memberDaoOracleSqlImpl(SessionFactory sessionFactory) {
-		MemberDaoOracleSqlImpl dao = new MemberDaoOracleSqlImpl();
-		dao.setSessionFactory(sessionFactory);
-		return dao;
+	public MemberDao memberDao(SessionFactory sessionFactory) {
+		return new MemberDaoOracleSqlImpl(sessionFactory);
 	}
 	
 	@Bean
