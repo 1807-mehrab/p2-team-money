@@ -16,6 +16,15 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
+import com.revature.stockinvestment.service.AccountServiceLayerImpl;
+import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
+import com.revature.stockinvestment.service.MemberServiceLayerImpl;
+import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
+
 @Configuration
 @ComponentScan("com.revature.stockinvestment")
 @EnableTransactionManagement
@@ -62,12 +71,34 @@ public class HibernateConfig {
 		
 		return tm;
 	}
+	
+	
+	//***********************/
+	// Account
+	//***********************/
+	@Bean
+	public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
+		AccountServiceLayerImpl as = new AccountServiceLayerImpl();
+		as.setDao(accountDao);
+		return as;
+	}	
+	
+	//***********************/
+	// Company
+	//***********************/
 
 	@Bean
 	public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
 		CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
 		dao.setSessionFactory(sessionFactory);
-		
+
 		return dao;
 	}
 
@@ -75,7 +106,40 @@ public class HibernateConfig {
 	public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
 		CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
 		cs.setDao(companyDao);
-		
 		return cs;
+	}
+		
+	//***********************/
+	// Member
+	//***********************/
+	@Bean
+	public MemberDaoOracleSqlImpl memberDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		MemberDaoOracleSqlImpl dao = new MemberDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
+		MemberServiceLayerImpl ms = new MemberServiceLayerImpl();
+		ms.setDao(memberDao);
+		return ms;
+	}
+	
+	//***********************/
+	// Transaction
+	//***********************/
+	@Bean
+	public TransactionDaoOracleSqlImpl transactionDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		TransactionDaoOracleSqlImpl dao = new TransactionDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao) {
+		TransactionServiceLayerImpl ts = new TransactionServiceLayerImpl();
+		ts.setDao(transactionDao);
+		return ts;
 	}
 }

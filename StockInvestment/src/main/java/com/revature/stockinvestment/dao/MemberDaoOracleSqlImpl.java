@@ -6,6 +6,7 @@
 package com.revature.stockinvestment.dao;
 
 import com.revature.stockinvestment.model.Member;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
+
 public class MemberDaoOracleSqlImpl implements MemberDao {
 
     private SessionFactory sessionFactory;
@@ -26,6 +28,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
 
     @Override
     public void addMember(Member member) throws SIPersistenceException {
