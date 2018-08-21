@@ -12,31 +12,45 @@ import javax.persistence.*;
  * @author James
  */
 @Entity
-@Table
-public class Company { 
-    @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="comSeq")
-    @SequenceGenerator(allocationSize=1, name="comSeq", sequenceName="SQ_COMPANY_PK")
-    @Column(name="COMPANY_ID")
-    private int companyStockId;
-    
-    @Column(name="COMPANY_NAME")
-    private String companyName;
+@Table(name="COMPANY")
+public class Company {
 
-    public int getCompanyStockId() {
-        return companyStockId;
-    }
+	@Id
+	@Column(name="COMPANY_ID")
+	private int company_id;
+	
+	@Column(name="COMPANY_NAME")
+	private String company_name;
 
-    public void setCompanyStockId(int companyStockId) {
-        this.companyStockId = companyStockId;
-    }
+	public Company() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	public Company(int company_id, String company_name) {
+		super();
+		this.company_id = company_id;
+		this.company_name = company_name;
+	}
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
+	public int getCompany_id() {
+		return company_id;
+	}
 
+	public void setCompany_id(int company_id) {
+		this.company_id = company_id;
+	}
+
+	public String getCompany_name() {
+		return company_name;
+	}
+
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [company_id=" + company_id + ", company_name=" + company_name + "]";
+	}
 }
