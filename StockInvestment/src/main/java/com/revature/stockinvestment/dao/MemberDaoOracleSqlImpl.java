@@ -9,6 +9,7 @@ import com.revature.stockinvestment.model.Member;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,12 +21,12 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
-
 public class MemberDaoOracleSqlImpl implements MemberDao {
 
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
+    @Inject
+    public MemberDaoOracleSqlImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

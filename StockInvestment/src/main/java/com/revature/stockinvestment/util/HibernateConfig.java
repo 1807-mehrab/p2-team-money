@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.MemberDao;
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
+import com.revature.stockinvestment.service.MemberServiceLayer;
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 
@@ -30,6 +32,7 @@ import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class HibernateConfig {
+    
 	@Autowired
 	private Environment env;
 
@@ -113,17 +116,13 @@ public class HibernateConfig {
 	// Member
 	//***********************/
 	@Bean
-	public MemberDaoOracleSqlImpl memberDaoOracleSqlImpl(SessionFactory sessionFactory) {
-		MemberDaoOracleSqlImpl dao = new MemberDaoOracleSqlImpl();
-		dao.setSessionFactory(sessionFactory);
-		return dao;
+	public MemberDao memberDao(SessionFactory sessionFactory) {
+		return new MemberDaoOracleSqlImpl(sessionFactory);
 	}
 	
 	@Bean
-	public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
-		MemberServiceLayerImpl ms = new MemberServiceLayerImpl();
-		ms.setDao(memberDao);
-		return ms;
+	public MemberServiceLayer memberService(MemberDao memberDao) {
+		return new MemberServiceLayerImpl(memberDao);
 	}
 	
 	//***********************/
