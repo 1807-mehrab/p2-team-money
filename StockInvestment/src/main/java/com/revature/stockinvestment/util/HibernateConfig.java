@@ -62,4 +62,20 @@ public class HibernateConfig {
 		
 		return tm;
 	}
+
+	@Bean
+	public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		
+		return dao;
+	}
+
+	@Bean
+	public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
+		CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
+		cs.setDao(companyDao);
+		
+		return cs;
+	}
 }
