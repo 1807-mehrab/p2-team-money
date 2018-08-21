@@ -6,30 +6,42 @@
 package com.revature.stockinvestment.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  *
  * @author James
  */
 @Entity
-@Table
+@Table(name = "MEMBER")
 public class Member {
+    
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="memSeq")
     @SequenceGenerator(allocationSize=1, name="memSeq", sequenceName="SQ_MEMBER_PK")
-    @Column(name="MEMBER_ID")
+    @Column(name = "MEMBER_ID")
     private int memberId;
     
-    @Column(name="FIRST_NAME")
+    @NotNull
+    @Pattern(regexp = "[a-z-A-Z]*")
+    @Size(min = 1, max = 20)
+    @Column(name = "FIRST_NAME", unique = false, nullable = false, length = 20)
     private String firstName;
     
-    @Column(name="LAST_NAME")
+    @NotNull
+    @Pattern(regexp = "[a-z-A-Z]*")
+    @Size(min = 1, max = 20)
+    @Column(name = "LAST_NAME", unique = false, nullable = false, length = 20)
     private String lastName;
     
-    @Column(name="EMAIL")
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 30)
     private String email;
     
-    @Column(name="PASSWORD")
+    @NotNull
+    @Size(min = 1, max = 40)
+    @Column(name = "PASSWORD", unique = false, nullable = false, length = 40)
     private String password;
 
     public int getMemberId() { 
