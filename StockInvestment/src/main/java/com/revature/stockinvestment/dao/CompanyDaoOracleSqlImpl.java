@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
+
 public class CompanyDaoOracleSqlImpl implements CompanyDao { 
     
     //***************************************
@@ -76,5 +77,4 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from company").list();
     }
-
 }

@@ -93,10 +93,12 @@ public class HibernateConfig {
 	//***********************/
 	// Company
 	//***********************/
+
 	@Bean
 	public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
 		CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
 		dao.setSessionFactory(sessionFactory);
+
 		return dao;
 	}
 

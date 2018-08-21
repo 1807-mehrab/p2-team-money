@@ -20,16 +20,16 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
-public class MemberDaoOracleSqlImpl implements MemberDao { 
-	
-    //***************************************
-	private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	//***************************************
-    
+public class MemberDaoOracleSqlImpl implements MemberDao {
+
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+
     @Override
     public void addMember(Member member) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
@@ -40,11 +40,11 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
 
     @Override
     public void deleteMember(int memberId) throws SIPersistenceException {
-    	Member member = getMemberByMemberId(memberId);
+        Member member = getMemberByMemberId(memberId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.delete(member);
-        t.commit();	
+        t.commit();
     }
 
     @Override
@@ -61,9 +61,9 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         List<Member> members = new ArrayList<Member>();
         Session s = sessionFactory.getCurrentSession();
         members = s.createQuery("from Member where member_id = :idVar")
-        		.setInteger("idVar", memberId).list();
-        if(!members.isEmpty()) {
-        	m = members.get(0);
+                .setInteger("idVar", memberId).list();
+        if (!members.isEmpty()) {
+            m = members.get(0);
         }
         return m;
     }
@@ -73,5 +73,5 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Member").list();
     }
-    
+
 }
