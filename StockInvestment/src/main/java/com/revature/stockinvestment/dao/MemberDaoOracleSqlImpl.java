@@ -37,6 +37,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
 
     @Override
     public void deleteMember(int memberId) throws SIPersistenceException {
+        Member member = getMemberByMemberId(memberId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.delete(member);
