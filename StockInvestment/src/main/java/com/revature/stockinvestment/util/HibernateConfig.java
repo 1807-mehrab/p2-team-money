@@ -2,7 +2,6 @@ package com.revature.stockinvestment.util;
 
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.MemberDao;
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import java.util.Properties;
 
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
-import com.revature.stockinvestment.service.MemberServiceLayer;
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 import org.springframework.web.servlet.ViewResolver;
