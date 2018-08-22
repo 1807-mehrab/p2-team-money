@@ -16,37 +16,31 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
-public class AccountServiceLayerImpl implements AccountServiceLayer {
+public class AccountServiceLayerImpl {
 
     @Autowired
     private AccountDaoOracleSqlImpl accountDao;
     
-    
-    public AccountServiceLayerImpl(AccountDaoOracleSqlImpl accountDao) {
+    public void setAccountDao(AccountDaoOracleSqlImpl accountDao) {
         this.accountDao = accountDao;
     }
     
-    @Override
     public void addAccount(Account account) { 
         accountDao.addAccount(account);
     }
 
-    @Override
     public void deleteAccount(int accountId) {
         accountDao.deleteAccount(accountId);
     }
 
-    @Override
     public void updateAccount(Account account) {
         accountDao.updateAccount(account);
     }
 
-    @Override
     public Account getAccountByAccountId(int accountId) {
         return accountDao.getAccountByAccountId(accountId);
     }
 
-    @Override
     public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();
     }

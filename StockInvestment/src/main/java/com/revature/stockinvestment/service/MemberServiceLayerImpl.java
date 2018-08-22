@@ -16,37 +16,31 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
-public class MemberServiceLayerImpl /*implements MemberServiceLayer*/ { 
+public class MemberServiceLayerImpl { 
 
     @Autowired
     private MemberDaoOracleSqlImpl memberDao;
     
-    
-    public MemberServiceLayerImpl(MemberDaoOracleSqlImpl memberDao) {
+    public void setMemberDao(MemberDaoOracleSqlImpl memberDao) {
         this.memberDao = memberDao;
     }
     
-    //@Override
     public void addMember(Member member) {
         memberDao.addMember(member);
     }
 
-    //@Override
     public void deleteMember(int memberId) {
         memberDao.deleteMember(memberId);
     }
 
-    //@Override
     public void updateMember(Member member) {
         memberDao.updateMember(member);
     }
 
-    //@Override
     public Member getMemberByMemberId(int memberId) {
         return memberDao.getMemberByMemberId(memberId);
     }
 
-    //@Override
     public List<Member> getAllMembers() {
         return memberDao.getAllMembers();
     }
