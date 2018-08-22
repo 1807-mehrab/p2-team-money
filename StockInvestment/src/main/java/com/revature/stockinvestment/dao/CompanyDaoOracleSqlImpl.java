@@ -21,20 +21,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CompanyDaoOracleSqlImpl {
 
-
-public class CompanyDaoOracleSqlImpl { 
-    
-    //***************************************
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	//***************************************
-    
-
-    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
-
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -42,19 +28,13 @@ public class CompanyDaoOracleSqlImpl {
     }
 
     public void addCompanyStock(Company companyStock) {
-
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.save(companyStock);
         t.commit();
     }
 
-
-    
-    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-
     public void deleteCompanyStock(int companyStockId) {
-
         Company companyStock = getCompanyStockByCompanyStockId(companyStockId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -62,24 +42,14 @@ public class CompanyDaoOracleSqlImpl {
         t.commit();
     }
 
-
-    
-    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
-
     public void updateCompanyStock(Company companyStock) {
-
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.save(companyStock);
         t.commit();
     }
 
-
-    
-    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
-
     public Company getCompanyStockByCompanyStockId(int companyStockId) {
-
         Company c = null;
         List<Company> companies = new ArrayList<Company>();
         Session s = sessionFactory.getCurrentSession();
@@ -94,12 +64,7 @@ public class CompanyDaoOracleSqlImpl {
         return c;
     }
 
-
-    
-    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
-
     public List<Company> getAllCompanyStocks() {
-
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from company").list();
     }
