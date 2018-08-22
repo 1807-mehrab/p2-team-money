@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
-import com.revature.stockinvestment.service.AccountServiceLayer;
+import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 
 @RestController
 public class AccountController {
 	
-	@Autowired //TODO: Review Autowiring
-    private AccountServiceLayer accountServiceLayer;
+    @Autowired //TODO: Review Autowiring
+    private AccountServiceLayerImpl accountServiceLayer;
 	
 	
 	@GetMapping("/account")
