@@ -5,23 +5,21 @@
  */
 package com.revature.stockinvestment.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author James
  */
-@Controller
+@CrossOrigin
+@RestController
 public class TransactionController {
+    
     @Autowired
     private TransactionServiceLayerImpl transactionServiceLayer;
-
-	public void setTransactionServiceLayer(TransactionServiceLayerImpl transactionServiceLayer) {
-		this.transactionServiceLayer = transactionServiceLayer;
-	}
     
     
     

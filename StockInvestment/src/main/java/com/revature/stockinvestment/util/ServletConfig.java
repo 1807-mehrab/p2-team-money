@@ -6,12 +6,10 @@
 package com.revature.stockinvestment.util;
 
 import javax.servlet.*;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-@Configuration
 public class ServletConfig implements WebApplicationInitializer {
 
     @Override
@@ -19,9 +17,9 @@ public class ServletConfig implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext annotationConfigWebApplicationContext = new AnnotationConfigWebApplicationContext();
         annotationConfigWebApplicationContext.register(HibernateConfig.class);
         annotationConfigWebApplicationContext.setServletContext(sc);
-        ServletRegistration.Dynamic dispatcherServlet = sc.addServlet("dispatcher", new DispatcherServlet(annotationConfigWebApplicationContext));
-        dispatcherServlet.setLoadOnStartup(1);
-        dispatcherServlet.addMapping("/");
+        ServletRegistration.Dynamic servlet = sc.addServlet("dispatcher", new DispatcherServlet(annotationConfigWebApplicationContext));
+        servlet.setLoadOnStartup(1);
+        servlet.addMapping("/");
     }
     
 }
