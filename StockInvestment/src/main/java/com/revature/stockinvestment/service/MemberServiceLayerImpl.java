@@ -5,12 +5,13 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.MemberDao;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
-import java.util.List;
-import javax.inject.Inject;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -19,12 +20,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberServiceLayerImpl implements MemberServiceLayer { 
 
-    private MemberDao memberDao;
-    
-    @Inject
-    public MemberServiceLayerImpl(MemberDao memberDao) {
-        this.memberDao = memberDao;
-    }
+    private MemberDaoOracleSqlImpl memberDao;
+     
+	public void setDao(MemberDaoOracleSqlImpl dao) {
+		this.memberDao = dao;
+	}
     
     @Override
     public void addMember(Member member) throws SIPersistenceException {
