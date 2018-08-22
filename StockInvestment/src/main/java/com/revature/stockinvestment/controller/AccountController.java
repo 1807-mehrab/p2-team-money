@@ -58,12 +58,6 @@ public class AccountController {
 		return false;
 	}
 	
-	
-	
-	
-	
-	
-	
     
 //    @Inject
 //    public AccountController(AccountServiceLayer accountServiceLayer) {
