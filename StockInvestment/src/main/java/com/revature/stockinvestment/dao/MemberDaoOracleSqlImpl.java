@@ -9,11 +9,11 @@ import com.revature.stockinvestment.model.Member;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,13 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author James
  */
-@Transactional
 @Repository
 public class MemberDaoOracleSqlImpl implements MemberDao {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
-    @Inject
+    
     public MemberDaoOracleSqlImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

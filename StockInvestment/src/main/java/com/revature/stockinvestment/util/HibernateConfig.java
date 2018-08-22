@@ -89,49 +89,47 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
     //***********************/
     // Account
     //***********************/
-    @Bean
-    public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
-        AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
-        dao.setSessionFactory(sessionFactory);
-        return dao;
-    }
-
-    @Bean
-    public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
-        AccountServiceLayerImpl as = new AccountServiceLayerImpl();
-        as.setDao(accountDao);
-        return as;
-    }
+//    @Bean
+//    public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
+//        AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
+//        dao.setSessionFactory(sessionFactory);
+//        return dao;
+//    }
+//
+//    @Bean
+//    public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
+//        return new AccountServiceLayerImpl(accountDao);
+//    }
 
     //***********************/
     // Company
     //***********************/
-    @Bean
-    public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
-        CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
-        dao.setSessionFactory(sessionFactory);
-        return dao;
-    }
-
-    @Bean
-    public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
-        CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
-        cs.setDao(companyDao);
-        return cs;
-    }
+//    @Bean
+//    public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
+//        CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
+//        dao.setSessionFactory(sessionFactory);
+//        return dao;
+//    }
+//
+//    @Bean
+//    public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
+//        CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
+//        cs.setDao(companyDao);
+//        return cs;
+//    }
 
     //***********************/
     // Member
     //***********************/
-    @Bean
-    public MemberDao memberDao(SessionFactory sessionFactory) {
-        return new MemberDaoOracleSqlImpl(sessionFactory);
-    }
-
-    @Bean
-    public MemberServiceLayer memberService(MemberDao memberDao) {
-        return new MemberServiceLayerImpl(memberDao);
-    }
+//    @Bean
+//    public MemberDao memberDao(SessionFactory sessionFactory) {
+//        return new MemberDaoOracleSqlImpl(sessionFactory);
+//    }
+//
+//    @Bean
+//    public MemberServiceLayer memberService(MemberDao memberDao) {
+//        return new MemberServiceLayerImpl(memberDao);
+//    }
 
     //***********************/
     // Transaction
@@ -145,9 +143,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao) {
-        TransactionServiceLayerImpl ts = new TransactionServiceLayerImpl();
-        ts.setDao(transactionDao);
-        return ts;
+        return new TransactionServiceLayerImpl(transactionDao);
     }
 
     @Override

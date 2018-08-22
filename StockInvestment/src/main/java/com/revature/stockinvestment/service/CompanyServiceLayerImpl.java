@@ -8,14 +8,16 @@ package com.revature.stockinvestment.service;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
 import java.util.List;
-import javax.inject.Inject;
-import org.springframework.stereotype.Service;
-import com.revature.stockinvestment.dao.CompanyDao;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author James
  */
+@Transactional
 @Repository
 public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 
