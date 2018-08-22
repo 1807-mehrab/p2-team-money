@@ -3,7 +3,6 @@ package com.revature.stockinvestment.controller;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
 import com.revature.stockinvestment.service.MemberServiceLayer;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -29,53 +28,30 @@ public class MemberController {
 
     @PostMapping("/member")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMember(@Valid @RequestBody Member member) {
-        try {
-            memberServiceLayer.addMember(member);
-        } catch (SIPersistenceException e) {
-            System.out.println(e.getMessage());
-        }
+    public void createMember(@Valid @RequestBody Member member) throws SIPersistenceException {
+        memberServiceLayer.addMember(member);
     }
-    
+
     @DeleteMapping("/member/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMember(@PathVariable("id") int id) {
-        try {
-            memberServiceLayer.deleteMember(id);
-        } catch (SIPersistenceException e) {
-            System.out.println(e.getMessage());
-        }
+    public void deleteMember(@PathVariable("id") int id) throws SIPersistenceException {
+        memberServiceLayer.deleteMember(id);
     }
-    
+
     @PutMapping("/member/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateMember(@PathVariable("id") int id, @Valid @RequestBody Member member) {
-        try {
-            memberServiceLayer.updateMember(member);
-        } catch (SIPersistenceException e) {
-            System.out.println(e.getMessage());
-        }
+    public void updateMember(@PathVariable("id") int id, @Valid @RequestBody Member member) throws SIPersistenceException {
+        memberServiceLayer.updateMember(member);
     }
-    
+
     @GetMapping("/member/{id}")
-    public Member getMemberByMemberId(@PathVariable("id") int id) {
-        Member member = null;
-        try {
-            member = memberServiceLayer.getMemberByMemberId(id);
-        } catch (SIPersistenceException e) {
-            System.out.println(e.getMessage());
-        }
-        return member;
+    public Member getMemberByMemberId(@PathVariable("id") int id) throws SIPersistenceException {
+        return memberServiceLayer.getMemberByMemberId(id);
+    }
+
+    @GetMapping("/members")
+    public List<Member> getAllMembers() throws SIPersistenceException {
+        return memberServiceLayer.getAllMembers();
     }
     
-    @GetMapping("/members")
-    public List<Member> getAllMembers() {
-        List<Member> memberList = new ArrayList<>();
-        try {
-            memberList = memberServiceLayer.getAllMembers();
-        } catch (SIPersistenceException e) {
-            System.out.println(e.getMessage());
-        }
-        return memberList;
-    }
 }
