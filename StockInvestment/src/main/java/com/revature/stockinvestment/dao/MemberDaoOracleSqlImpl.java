@@ -25,12 +25,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class MemberDaoOracleSqlImpl implements MemberDao {
 
-    private SessionFactory sessionFactory;
+    //***************************************
+	private SessionFactory sessionFactory;
 
-    @Inject
-    public MemberDaoOracleSqlImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	//***************************************
 
 
     @Override

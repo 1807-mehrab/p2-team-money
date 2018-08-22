@@ -77,4 +77,19 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from company").list();
     }
+    
+    public Company getCompanyByName(String companyname) throws SIPersistenceException {
+        Company c = null;
+        List<Company> companies = new ArrayList<Company>();
+        Session s = sessionFactory.getCurrentSession();
+        
+        companies = s.createQuery("from Company where company_name = :cName")
+        		.setString("cName", companyname).list();
+        
+        if(!companies.isEmpty()) {
+        	c = companies.get(0);
+        }
+        
+        return c;
+    }
 }
