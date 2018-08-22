@@ -5,50 +5,54 @@
  */
 package com.revature.stockinvestment.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
-import java.util.List;
-import javax.inject.Inject;
-import org.springframework.stereotype.Service;
-import com.revature.stockinvestment.dao.CompanyDao;
 
 /**
  *
  * @author James
  */
-@Service
-public class CompanyServiceLayerImpl implements CompanyServiceLayer { 
+@Repository
+public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 
-    private CompanyDao companyStockDao;
-    
-    @Inject
-    public CompanyServiceLayerImpl(CompanyDao companyStockDao) {
-        this.companyStockDao = companyStockDao;
-    }
-    
-    @Override
-    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
-        companyStockDao.addCompanyStock(companyStock);
-    }
+	@Autowired
+	CompanyDaoOracleSqlImpl dao;
 
-    @Override
-    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-        companyStockDao.deleteCompanyStock(companyStockId);
-    }
+	public void setDao(CompanyDaoOracleSqlImpl dao) {
+		this.dao = dao;
+	}
+	
+	//@Transactional
+	public void addCompanyStock(Company companyStock) throws SIPersistenceException {
+		dao.addCompanyStock(companyStock);
+		
+	}
 
-    @Override
-    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
-        companyStockDao.updateCompanyStock(companyStock);
-    }
+	//@Transactional
+	public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
+		dao.deleteCompanyStock(companyStockId);
+		
+	}
 
-    @Override
-    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
-        return companyStockDao.getCompanyStockByCompanyStockId(companyStockId);
-    }
+	//@Transactional
+	public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
+		dao.updateCompanyStock(companyStock);
+		
+	}
 
-    @Override
-    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
-        return companyStockDao.getAllCompanyStocks();
-    }
-    
+	//@Transactional
+	public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+		return dao.getCompanyStockByCompanyStockId(companyStockId);
+	}
+
+	//@Transactional
+	public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+		return dao.getAllCompanyStocks();
+	}
 }

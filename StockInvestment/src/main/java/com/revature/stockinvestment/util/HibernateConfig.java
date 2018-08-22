@@ -16,11 +16,28 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.MemberDao;
+import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
+import com.revature.stockinvestment.service.AccountServiceLayerImpl;
+import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
+import com.revature.stockinvestment.service.MemberServiceLayer;
+import com.revature.stockinvestment.service.MemberServiceLayerImpl;
+import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+
 @Configuration
 @ComponentScan("com.revature.stockinvestment")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-public class HibernateConfig {
+public class HibernateConfig extends WebMvcConfigurerAdapter {
+
 	@Autowired
 	private Environment env;
 
@@ -62,4 +79,92 @@ public class HibernateConfig {
 		
 		return tm;
 	}
+	
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+        internalResourceViewResolver.setViewClass(JstlView.class);
+        internalResourceViewResolver.setPrefix("/WEB-INF/");
+        internalResourceViewResolver.setSuffix(".html");
+        return internalResourceViewResolver;
+    }
+	
+	
+	//***********************/
+	// Account
+	//***********************/
+	@Bean
+	public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
+		AccountServiceLayerImpl as = new AccountServiceLayerImpl();
+		as.setDao(accountDao);
+		return as;
+	}	
+	
+	//***********************/
+	// Company
+	//***********************/
+
+	@Bean
+	public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+
+		return dao;
+	}
+
+	@Bean
+	public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
+		CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
+		cs.setDao(companyDao);
+		return cs;
+	}
+		
+	//***********************/
+	// Member
+	//***********************/
+	@Bean
+	public MemberDaoOracleSqlImpl memberDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		MemberDaoOracleSqlImpl dao = new MemberDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
+		MemberServiceLayerImpl ms = new MemberServiceLayerImpl();
+		ms.setDao(memberDao);
+		return ms;
+	}
+	
+	//***********************/
+	// Transaction
+	//***********************/
+	@Bean
+	public TransactionDaoOracleSqlImpl transactionDaoOracleSqlImpl(SessionFactory sessionFactory) {
+		TransactionDaoOracleSqlImpl dao = new TransactionDaoOracleSqlImpl();
+		dao.setSessionFactory(sessionFactory);
+		return dao;
+	}
+	
+	@Bean
+	public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao, AccountDaoOracleSqlImpl accountDao, CompanyDaoOracleSqlImpl companyDao) {
+		TransactionServiceLayerImpl ts = new TransactionServiceLayerImpl();
+		ts.setTDao(transactionDao);
+		ts.setADao(accountDao);
+		ts.setCDao(companyDao);
+		return ts;
+	}
+	
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
+
 }
