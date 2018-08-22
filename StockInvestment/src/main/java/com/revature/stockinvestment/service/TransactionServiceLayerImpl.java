@@ -5,16 +5,12 @@
  */
 package com.revature.stockinvestment.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
-import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.TransactionDao;
 import com.revature.stockinvestment.model.Transaction;
+import java.util.List;
+import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  *
@@ -23,26 +19,13 @@ import com.revature.stockinvestment.model.Transaction;
 @Service
 public class TransactionServiceLayerImpl implements TransactionServiceLayer {
 
-	@Autowired
-	private TransactionDaoOracleSqlImpl transactionDao;
-	
-	@Autowired
-	private AccountDaoOracleSqlImpl accountDao;
-	
-	@Autowired
-	private CompanyDaoOracleSqlImpl companyDao;
-
-	public void setTDao(TransactionDaoOracleSqlImpl dao) {
-		this.transactionDao = dao;
-	}
+    private TransactionDao transactionDao;
     
-	public void setADao(AccountDaoOracleSqlImpl dao) {
-		this.accountDao = dao;
-	}
-	
-	public void setCDao(CompanyDaoOracleSqlImpl dao) {
-		this.companyDao = dao;
-	}
+    @Inject
+    public TransactionServiceLayerImpl(TransactionDao transactionDao) {
+        this.transactionDao = transactionDao;
+    }
+    
     @Override
     public void addTransaction(Transaction transaction) throws SIPersistenceException {
         transactionDao.addTransaction(transaction);
@@ -65,16 +48,7 @@ public class TransactionServiceLayerImpl implements TransactionServiceLayer {
 
     @Override
     public List<Transaction> getAllTransactions() throws SIPersistenceException {
-
-    	return transactionDao.getAllTransactions();
-    }
-    
-    public void createTransaction(int accountid, String companyname, int shares, double purchaseprice) throws SIPersistenceException {
-    	Transaction t = new Transaction();
-    	t.setAccount(accountDao.getAccountByAccountId(accountid));
-    	t.setCompany(companyDao.getCompanyByName(companyname));
-    	t.setPurchasePrice(purchaseprice);
-    	t.setShares(shares);
+        return transactionDao.getAllTransactions();
     }
     
 }
