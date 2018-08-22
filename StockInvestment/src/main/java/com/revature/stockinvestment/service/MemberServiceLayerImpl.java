@@ -16,11 +16,39 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
+
+public class MemberServiceLayerImpl { //implements MemberServiceLayer { 
+
 public class MemberServiceLayerImpl { 
+
 
     @Autowired
     private MemberDaoOracleSqlImpl memberDao;
     
+
+    //@Override
+    public void addMember(Member member) throws SIPersistenceException {
+        memberDao.addMember(member);
+    }
+
+    //@Override
+    public void deleteMember(int memberId) throws SIPersistenceException {
+        memberDao.deleteMember(memberId);
+    }
+
+    //@Override
+    public void updateMember(Member member) throws SIPersistenceException {
+        memberDao.updateMember(member);
+    }
+
+    //@Override
+    public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
+        return memberDao.getMemberByMemberId(memberId);
+    }
+
+    //@Override
+    public List<Member> getAllMembers() throws SIPersistenceException {
+
     public void setMemberDao(MemberDaoOracleSqlImpl memberDao) {
         this.memberDao = memberDao;
     }
@@ -42,6 +70,7 @@ public class MemberServiceLayerImpl {
     }
 
     public List<Member> getAllMembers() {
+
         return memberDao.getAllMembers();
     }
     

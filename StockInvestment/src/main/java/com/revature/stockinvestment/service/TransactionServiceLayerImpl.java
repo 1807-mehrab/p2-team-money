@@ -16,7 +16,11 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
+
+public class TransactionServiceLayerImpl { //implements TransactionServiceLayer {
+
 public class TransactionServiceLayerImpl {
+
 
     @Autowired
     private TransactionDaoOracleSqlImpl transactionDao;
@@ -25,6 +29,47 @@ public class TransactionServiceLayerImpl {
         this.transactionDao = transactionDao;
     }
     
+
+	public void setADao(AccountDaoOracleSqlImpl dao) {
+		this.accountDao = dao;
+	}
+	
+	public void setCDao(CompanyDaoOracleSqlImpl dao) {
+		this.companyDao = dao;
+	}
+    //@Override
+    public void addTransaction(Transaction transaction) throws SIPersistenceException {
+        transactionDao.addTransaction(transaction);
+    }
+
+    //@Override
+    public void deleteTransaction(int transactionId) throws SIPersistenceException {
+        transactionDao.deleteTransaction(transactionId);
+    }
+
+    //@Override
+    public void updateTransaction(Transaction transaction) throws SIPersistenceException {
+        transactionDao.updateTransaction(transaction);
+    }
+
+    //@Override
+    public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
+        return transactionDao.getTransactionByTransactionId(transactionId);
+    }
+
+    //@Override
+    public List<Transaction> getAllTransactions() throws SIPersistenceException {
+
+    	return transactionDao.getAllTransactions();
+    }
+    
+    public void createTransaction(int accountid, String companyname, int shares, double purchaseprice) throws SIPersistenceException {
+    	Transaction t = new Transaction();
+    	t.setAccount(accountDao.getAccountByAccountId(accountid));
+    	t.setCompany(companyDao.getCompanyByName(companyname));
+    	t.setPurchasePrice(purchaseprice);
+    	t.setShares(shares);
+
     public void addTransaction(Transaction transaction) {
         transactionDao.addTransaction(transaction);
     }
@@ -43,6 +88,7 @@ public class TransactionServiceLayerImpl {
 
     public List<Transaction> getAllTransactions() {
         return transactionDao.getAllTransactions();
+
     }
     
 }

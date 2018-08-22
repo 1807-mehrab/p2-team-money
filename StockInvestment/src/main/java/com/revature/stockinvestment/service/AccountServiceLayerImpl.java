@@ -5,11 +5,20 @@
  */
 package com.revature.stockinvestment.service;
 
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.model.Account;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  *
@@ -17,6 +26,37 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AccountServiceLayerImpl {
+
+
+	@Autowired
+    private AccountDaoOracleSqlImpl accountDao;
+       
+	public void setDao(AccountDaoOracleSqlImpl dao) {
+		this.accountDao = dao;
+	}
+        
+    //@Override
+    public void addAccount(Account account) throws SIPersistenceException { 
+        accountDao.addAccount(account);
+    }
+
+    //@Override
+    public void deleteAccount(int accountId) throws SIPersistenceException {
+        accountDao.deleteAccount(accountId);
+    }
+
+    //@Override
+    public void updateAccount(Account account) throws SIPersistenceException {
+        accountDao.updateAccount(account);
+    }
+
+    //@Override
+    public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
+        return accountDao.getAccountByAccountId(accountId);
+    }
+
+    //@Override
+    public List<Account> getAllAccounts() throws SIPersistenceException {
 
     @Autowired
     private AccountDaoOracleSqlImpl accountDao;
@@ -42,6 +82,7 @@ public class AccountServiceLayerImpl {
     }
 
     public List<Account> getAllAccounts() {
+
         return accountDao.getAllAccounts();
     }
     
