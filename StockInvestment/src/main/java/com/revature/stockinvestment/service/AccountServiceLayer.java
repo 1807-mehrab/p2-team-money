@@ -5,7 +5,6 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
 import java.util.List;
 
@@ -15,14 +14,14 @@ import java.util.List;
  */
 public interface AccountServiceLayer { 
     
-    public void addAccount(Account account) throws SIPersistenceException;
+    public void addAccount(Account account);
     
-    public void deleteAccount(int accountId) throws SIPersistenceException;
+    public void deleteAccount(int accountId);
     
-    public void updateAccount(Account account) throws SIPersistenceException;
+    public void updateAccount(Account account);
     
-    public Account getAccountByAccountId(int accountId) throws SIPersistenceException;
+    public Account getAccountByAccountId(int accountId);
     
-    public List<Account> getAllAccounts() throws SIPersistenceException;
+    public List<Account> getAllAccounts();
     
 }

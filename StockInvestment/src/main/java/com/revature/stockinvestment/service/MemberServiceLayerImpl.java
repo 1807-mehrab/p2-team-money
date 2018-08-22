@@ -6,7 +6,6 @@
 package com.revature.stockinvestment.service;
 
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
-public class MemberServiceLayerImpl implements MemberServiceLayer { 
+public class MemberServiceLayerImpl /*implements MemberServiceLayer*/ { 
 
     @Autowired
     private MemberDaoOracleSqlImpl memberDao;
@@ -27,28 +26,28 @@ public class MemberServiceLayerImpl implements MemberServiceLayer {
         this.memberDao = memberDao;
     }
     
-    @Override
-    public void addMember(Member member) throws SIPersistenceException {
+    //@Override
+    public void addMember(Member member) {
         memberDao.addMember(member);
     }
 
-    @Override
-    public void deleteMember(int memberId) throws SIPersistenceException {
+    //@Override
+    public void deleteMember(int memberId) {
         memberDao.deleteMember(memberId);
     }
 
-    @Override
-    public void updateMember(Member member) throws SIPersistenceException {
+    //@Override
+    public void updateMember(Member member) {
         memberDao.updateMember(member);
     }
 
-    @Override
-    public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
+    //@Override
+    public Member getMemberByMemberId(int memberId) {
         return memberDao.getMemberByMemberId(memberId);
     }
 
-    @Override
-    public List<Member> getAllMembers() throws SIPersistenceException {
+    //@Override
+    public List<Member> getAllMembers() {
         return memberDao.getAllMembers();
     }
     

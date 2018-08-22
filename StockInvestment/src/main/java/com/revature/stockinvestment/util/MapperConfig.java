@@ -23,12 +23,12 @@ public class MapperConfig extends WebMvcConfigurationSupport {
     
     @Override
     protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.add(mapObject());
+        converters.add(mappingJackson2HttpMessageConverter());
         addDefaultHttpMessageConverters(converters);
     }
     
     @Bean
-    public MappingJackson2HttpMessageConverter mapObject() {
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
         return new MappingJackson2HttpMessageConverter(mapper);

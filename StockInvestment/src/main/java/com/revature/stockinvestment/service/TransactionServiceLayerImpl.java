@@ -5,7 +5,6 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.dao.TransactionDao;
 import com.revature.stockinvestment.model.Transaction;
 import java.util.List;
@@ -27,27 +26,27 @@ public class TransactionServiceLayerImpl implements TransactionServiceLayer {
     }
     
     @Override
-    public void addTransaction(Transaction transaction) throws SIPersistenceException {
+    public void addTransaction(Transaction transaction) {
         transactionDao.addTransaction(transaction);
     }
 
     @Override
-    public void deleteTransaction(int transactionId) throws SIPersistenceException {
+    public void deleteTransaction(int transactionId) {
         transactionDao.deleteTransaction(transactionId);
     }
 
     @Override
-    public void updateTransaction(Transaction transaction) throws SIPersistenceException {
+    public void updateTransaction(Transaction transaction) {
         transactionDao.updateTransaction(transaction);
     }
 
     @Override
-    public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
+    public Transaction getTransactionByTransactionId(int transactionId) {
         return transactionDao.getTransactionByTransactionId(transactionId);
     }
 
     @Override
-    public List<Transaction> getAllTransactions() throws SIPersistenceException {
+    public List<Transaction> getAllTransactions() {
         return transactionDao.getAllTransactions();
     }
     

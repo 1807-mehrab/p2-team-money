@@ -15,7 +15,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -34,7 +33,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
 
 
     @Override
-    public void addMember(Member member) throws SIPersistenceException {
+    public void addMember(Member member) {
         Session s = sessionFactory.getCurrentSession();
         Transaction tx = s.beginTransaction();
         s.save(member);
@@ -42,7 +41,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     }
 
     @Override
-    public void deleteMember(int memberId) throws SIPersistenceException {
+    public void deleteMember(int memberId) {
         Member member = getMemberByMemberId(memberId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -51,7 +50,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     }
 
     @Override
-    public void updateMember(Member member) throws SIPersistenceException {
+    public void updateMember(Member member) {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.update(member);
@@ -59,7 +58,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     }
 
     @Override
-    public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
+    public Member getMemberByMemberId(int memberId) {
         Member m = null;
         List<Member> members = new ArrayList<Member>();
         Session s = sessionFactory.getCurrentSession();
@@ -72,7 +71,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
     }
 
     @Override
-    public List<Member> getAllMembers() throws SIPersistenceException {
+    public List<Member> getAllMembers() {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Member").list();
     }

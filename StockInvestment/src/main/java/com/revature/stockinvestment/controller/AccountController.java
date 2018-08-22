@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.*;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 
@@ -19,7 +18,7 @@ public class AccountController {
 	
 	
 	@GetMapping("/account")
-	public List<Account> getAllAccounts() throws SIPersistenceException {
+	public List<Account> getAllAccounts() {
 		
 		List<Account> accounts = accountServiceLayer.getAllAccounts();
 		
@@ -27,7 +26,7 @@ public class AccountController {
 	}
 	
 	@GetMapping("/account/{id}")
-	public Account getAccountById(@PathVariable("id") int accountId) throws SIPersistenceException {
+	public Account getAccountById(@PathVariable("id") int accountId) {
 		Account account = null;
 		if (doesAccountIdExist(accountId)) {
 			account = accountServiceLayer.getAccountByAccountId(accountId);
@@ -38,7 +37,7 @@ public class AccountController {
 	
 	//TODO: delete account by id using HTTP DELETE method
 	@DeleteMapping("/account/{id}")
-	public BodyBuilder deleteAccountById(@PathVariable("id") int accountId) throws SIPersistenceException {
+	public BodyBuilder deleteAccountById(@PathVariable("id") int accountId) {
 		if(doesAccountIdExist(accountId)) {
 			return ResponseEntity.ok();
 		}
@@ -50,7 +49,7 @@ public class AccountController {
 	//TODO: update account with money to account by id using POST method
 	//TODO: create account using post method
 	
-	private boolean doesAccountIdExist(int accountId) throws SIPersistenceException {
+	private boolean doesAccountIdExist(int accountId) {
 		if(accountServiceLayer.getAccountByAccountId(accountId) != null) {
 			return true;
 		}
