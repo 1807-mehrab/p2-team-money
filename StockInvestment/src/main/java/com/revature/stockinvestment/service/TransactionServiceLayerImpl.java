@@ -5,10 +5,10 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.TransactionDao;
+import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.model.Transaction;
 import java.util.List;
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,36 +16,31 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
-public class TransactionServiceLayerImpl implements TransactionServiceLayer {
+public class TransactionServiceLayerImpl {
 
-    private TransactionDao transactionDao;
+    @Autowired
+    private TransactionDaoOracleSqlImpl transactionDao;
     
-    @Inject
-    public TransactionServiceLayerImpl(TransactionDao transactionDao) {
+    public void setTransactionDao(TransactionDaoOracleSqlImpl transactionDao) {
         this.transactionDao = transactionDao;
     }
     
-    @Override
     public void addTransaction(Transaction transaction) {
         transactionDao.addTransaction(transaction);
     }
 
-    @Override
     public void deleteTransaction(int transactionId) {
         transactionDao.deleteTransaction(transactionId);
     }
 
-    @Override
     public void updateTransaction(Transaction transaction) {
         transactionDao.updateTransaction(transaction);
     }
 
-    @Override
     public Transaction getTransactionByTransactionId(int transactionId) {
         return transactionDao.getTransactionByTransactionId(transactionId);
     }
 
-    @Override
     public List<Transaction> getAllTransactions() {
         return transactionDao.getAllTransactions();
     }

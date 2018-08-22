@@ -14,23 +14,20 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.stockinvestment.model.Account;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author James
  */
 @Repository
-public class AccountDaoOracleSqlImpl implements AccountDao {
+public class AccountDaoOracleSqlImpl {
 
-    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
     public void addAccount(Account account) {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -38,7 +35,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
     public void deleteAccount(int accountId) {
         Account account = getAccountByAccountId(accountId);
         Session s = sessionFactory.getCurrentSession();
@@ -47,7 +43,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
     public void updateAccount(Account account) {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -55,7 +50,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
     public Account getAccountByAccountId(int accountId) {
         Account a = null;
         List<Account> accounts = new ArrayList<Account>();
@@ -69,7 +63,6 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         return a;
     }
 
-    @Override
     public List<Account> getAllAccounts() {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Account").list();

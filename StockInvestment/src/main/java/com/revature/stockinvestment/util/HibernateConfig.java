@@ -1,5 +1,9 @@
 package com.revature.stockinvestment.util;
 
+import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.MemberDao;
+import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -16,10 +20,6 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.MemberDao;
-import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
@@ -78,73 +78,69 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
         return tm;
     }
 
-//    @Bean
-//    public ViewResolver viewResolver() {
-//        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-//        internalResourceViewResolver.setViewClass(JstlView.class);
-//        internalResourceViewResolver.setPrefix("/WEB-INF/");
-//        internalResourceViewResolver.setSuffix(".html");
-//        return internalResourceViewResolver;
-//    }
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+        internalResourceViewResolver.setViewClass(JstlView.class);
+        internalResourceViewResolver.setPrefix("/WEB-INF/");
+        internalResourceViewResolver.setSuffix(".html");
+        return internalResourceViewResolver;
+    }
 
-    //***********************/
-    // Account
-    //***********************/
-//    @Bean
-//    public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
-//        AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
-//        dao.setSessionFactory(sessionFactory);
-//        return dao;
-//    }
-//
-//    @Bean
-//    public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
-//        return new AccountServiceLayerImpl(accountDao);
-//    }
+    @Bean
+    public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
+        AccountDaoOracleSqlImpl accountDao = new AccountDaoOracleSqlImpl();
+        accountDao.setSessionFactory(sessionFactory);
+        return accountDao;
+    }
 
-    //***********************/
-    // Company
-    //***********************/
-//    @Bean
-//    public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
-//        CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
-//        dao.setSessionFactory(sessionFactory);
-//        return dao;
-//    }
-//
-//    @Bean
-//    public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
-//        CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
-//        cs.setDao(companyDao);
-//        return cs;
-//    }
+    @Bean
+    public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
+        AccountServiceLayerImpl accountService = new AccountServiceLayerImpl();
+        accountService.setAccountDao(accountDao);
+        return accountService;
+    }
 
-    //***********************/
-    // Member
-    //***********************/
-//    @Bean
-//    public MemberDao memberDao(SessionFactory sessionFactory) {
-//        return new MemberDaoOracleSqlImpl(sessionFactory);
-//    }
-//
-//    @Bean
-//    public MemberServiceLayer memberService(MemberDao memberDao) {
-//        return new MemberServiceLayerImpl(memberDao);
-//    }
+    @Bean
+    public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
+        CompanyDaoOracleSqlImpl companyDao = new CompanyDaoOracleSqlImpl();
+        companyDao.setSessionFactory(sessionFactory);
+        return companyDao;
+    }
 
-    //***********************/
-    // Transaction
-    //***********************/
+    @Bean
+    public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
+        CompanyServiceLayerImpl companyService = new CompanyServiceLayerImpl();
+        companyService.setCompanyDao(companyDao);
+        return companyService;
+    }
+
+    @Bean
+    public MemberDaoOracleSqlImpl memberDaoOracleSqlImpl(SessionFactory sessionFactory) {
+        MemberDaoOracleSqlImpl memberDao = new MemberDaoOracleSqlImpl();
+        memberDao.setSessionFactory(sessionFactory);
+        return memberDao;
+    }
+
+    @Bean
+    public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
+        MemberServiceLayerImpl memberService = new MemberServiceLayerImpl();
+        memberService.setMemberDao(memberDao);
+        return memberService;
+    }
+
     @Bean
     public TransactionDaoOracleSqlImpl transactionDaoOracleSqlImpl(SessionFactory sessionFactory) {
-        TransactionDaoOracleSqlImpl dao = new TransactionDaoOracleSqlImpl();
-        dao.setSessionFactory(sessionFactory);
-        return dao;
+        TransactionDaoOracleSqlImpl transactionDao = new TransactionDaoOracleSqlImpl();
+        transactionDao.setSessionFactory(sessionFactory);
+        return transactionDao;
     }
 
     @Bean
     public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao) {
-        return new TransactionServiceLayerImpl(transactionDao);
+        TransactionServiceLayerImpl transactionService = new TransactionServiceLayerImpl();
+        transactionService.setTransactionDao(transactionDao);
+        return transactionService;
     }
 
     @Override

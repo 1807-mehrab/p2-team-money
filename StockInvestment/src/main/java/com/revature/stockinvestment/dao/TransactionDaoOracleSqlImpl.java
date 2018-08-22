@@ -19,17 +19,14 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
-public class TransactionDaoOracleSqlImpl implements TransactionDao {
-    
-	//***************************************
-	private SessionFactory sessionFactory;
+public class TransactionDaoOracleSqlImpl {
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	//***************************************
-	
-    @Override
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     public void addTransaction(Transaction transaction) {
         Session s = sessionFactory.getCurrentSession();
         org.hibernate.Transaction t = s.beginTransaction();
@@ -37,40 +34,36 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
         t.commit();
     }
 
-    @Override
     public void deleteTransaction(int transactionId) {
-    	Transaction transaction = getTransactionByTransactionId(transactionId);
-    	Session s = sessionFactory.getCurrentSession();
-    	org.hibernate.Transaction t = s.beginTransaction();
-    	s.delete(transaction);
-    	t.commit();
+        Transaction transaction = getTransactionByTransactionId(transactionId);
+        Session s = sessionFactory.getCurrentSession();
+        org.hibernate.Transaction t = s.beginTransaction();
+        s.delete(transaction);
+        t.commit();
     }
 
-    @Override
     public void updateTransaction(Transaction transaction) {
-    	Session s = sessionFactory.getCurrentSession();
-    	org.hibernate.Transaction t = s.beginTransaction();
-    	s.save(transaction);
-    	t.commit();
+        Session s = sessionFactory.getCurrentSession();
+        org.hibernate.Transaction t = s.beginTransaction();
+        s.save(transaction);
+        t.commit();
     }
 
-    @Override
     public Transaction getTransactionByTransactionId(int transactionId) {
-    	Transaction transaction = null;
-    	List<Transaction> transactions = new ArrayList<Transaction>();
-    	Session s = sessionFactory.getCurrentSession();
-    	transactions = s.createQuery("from Transaction where transaction_id = :tId")
-    			.setInteger("tId", transactionId).list();
-    	if(!transactions.isEmpty()) {
-    		transaction = transactions.get(0);
-    	}
-    	return transaction;
+        Transaction transaction = null;
+        List<Transaction> transactions = new ArrayList<Transaction>();
+        Session s = sessionFactory.getCurrentSession();
+        transactions = s.createQuery("from Transaction where transaction_id = :tId")
+                .setInteger("tId", transactionId).list();
+        if (!transactions.isEmpty()) {
+            transaction = transactions.get(0);
+        }
+        return transaction;
     }
 
-    @Override
     public List<Transaction> getAllTransactions() {
-    	Session s = sessionFactory.getCurrentSession();
-    	return s.createQuery("from Transaction").list();
+        Session s = sessionFactory.getCurrentSession();
+        return s.createQuery("from Transaction").list();
     }
-    
+
 }
