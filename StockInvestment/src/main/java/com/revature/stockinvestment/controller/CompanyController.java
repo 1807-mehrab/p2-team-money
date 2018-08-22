@@ -1,6 +1,5 @@
 package com.revature.stockinvestment.controller;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
 import javax.inject.Inject;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
@@ -30,28 +29,28 @@ public class CompanyController {
 	
 	 @PostMapping("/company")
          @ResponseStatus(HttpStatus.CREATED)
-	 public void addCompany(@Valid @RequestBody Company company) throws SIPersistenceException {
+	 public void addCompany(@Valid @RequestBody Company company) {
 		 cs.addCompanyStock(company);
 	 }
 	    
 	 @DeleteMapping("/company/{id}")
          @ResponseStatus(HttpStatus.NO_CONTENT)
-	 public void deleteCompany(@PathVariable("id") int id) throws SIPersistenceException {
+	 public void deleteCompany(@PathVariable("id") int id) {
 		 cs.deleteCompanyStock(id);
 	 }
 	    
 	 @PutMapping("/company/{id}")
-	 public void updateCompanyStock(@PathVariable("id") int id, @Valid @RequestBody Company company) throws SIPersistenceException {
+	 public void updateCompanyStock(@PathVariable("id") int id, @Valid @RequestBody Company company) {
 		 cs.updateCompanyStock(company);
 	 }
 	    
 	 @GetMapping("/company/{id}")
-	 public Company getCompanyStockByCompanyStockId(@PathVariable("id") int id) throws SIPersistenceException {
+	 public Company getCompanyStockByCompanyStockId(@PathVariable("id") int id) {
 		return cs.getCompanyStockByCompanyStockId(id);
 	 }
 	    
 	 @GetMapping("/companies")
-	 public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+	 public List<Company> getAllCompanyStocks() {
 		return cs.getAllCompanyStocks();
 	 }
 

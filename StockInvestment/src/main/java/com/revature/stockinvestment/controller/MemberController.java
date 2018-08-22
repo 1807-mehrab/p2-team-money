@@ -1,6 +1,5 @@
 package com.revature.stockinvestment.controller;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import java.util.List;
@@ -24,29 +23,29 @@ public class MemberController {
 
     @PostMapping("/member")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMember(@Valid @RequestBody Member member) throws SIPersistenceException {
+    public void createMember(@Valid @RequestBody Member member) {
         memberServiceLayer.addMember(member);
     }
 
     @DeleteMapping("/member/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteMember(@PathVariable("id") int id) throws SIPersistenceException {
+    public void deleteMember(@PathVariable("id") int id) {
         memberServiceLayer.deleteMember(id);
     }
 
     @PutMapping("/member/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateMember(@PathVariable("id") int id, @Valid @RequestBody Member member) throws SIPersistenceException {
+    public void updateMember(@PathVariable("id") int id, @Valid @RequestBody Member member) {
         memberServiceLayer.updateMember(member);
     }
 
     @GetMapping("/member/{id}")
-    public Member getMemberByMemberId(@PathVariable("id") int id) throws SIPersistenceException {
+    public Member getMemberByMemberId(@PathVariable("id") int id) {
         return memberServiceLayer.getMemberByMemberId(id);
     }
 
     @GetMapping("/members")
-    public List<Member> getAllMembers() throws SIPersistenceException {
+    public List<Member> getAllMembers() {
         return memberServiceLayer.getAllMembers();
     }
     

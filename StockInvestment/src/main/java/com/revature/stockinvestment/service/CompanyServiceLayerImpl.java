@@ -5,7 +5,6 @@
  */
 package com.revature.stockinvestment.service;
 
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
 import java.util.List;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
@@ -29,30 +28,30 @@ public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 	}
 	
 	@Transactional
-	public void addCompanyStock(Company companyStock) throws SIPersistenceException {
+	public void addCompanyStock(Company companyStock) {
 		dao.addCompanyStock(companyStock);
 		
 	}
 
 	@Transactional
-	public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
+	public void deleteCompanyStock(int companyStockId) {
 		dao.deleteCompanyStock(companyStockId);
 		
 	}
 
 	@Transactional
-	public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
+	public void updateCompanyStock(Company companyStock) {
 		dao.updateCompanyStock(companyStock);
 		
 	}
 
 	@Transactional
-	public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+	public Company getCompanyStockByCompanyStockId(int companyStockId) {
 		return dao.getCompanyStockByCompanyStockId(companyStockId);
 	}
 
 	@Transactional
-	public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+	public List<Company> getAllCompanyStocks() {
 		return dao.getAllCompanyStocks();
 	}
 }

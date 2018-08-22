@@ -6,7 +6,6 @@
 package com.revature.stockinvestment.service;
 
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +27,27 @@ public class AccountServiceLayerImpl implements AccountServiceLayer {
     }
     
     @Override
-    public void addAccount(Account account) throws SIPersistenceException { 
+    public void addAccount(Account account) { 
         accountDao.addAccount(account);
     }
 
     @Override
-    public void deleteAccount(int accountId) throws SIPersistenceException {
+    public void deleteAccount(int accountId) {
         accountDao.deleteAccount(accountId);
     }
 
     @Override
-    public void updateAccount(Account account) throws SIPersistenceException {
+    public void updateAccount(Account account) {
         accountDao.updateAccount(account);
     }
 
     @Override
-    public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
+    public Account getAccountByAccountId(int accountId) {
         return accountDao.getAccountByAccountId(accountId);
     }
 
     @Override
-    public List<Account> getAllAccounts() throws SIPersistenceException {
+    public List<Account> getAllAccounts() {
         return accountDao.getAllAccounts();
     }
     

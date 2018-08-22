@@ -14,15 +14,15 @@ import java.util.List;
  */
 public interface TransactionDao {
     
-    public void addTransaction(Transaction transaction) throws SIPersistenceException;
+    public void addTransaction(Transaction transaction);
     
-    public void deleteTransaction(int transactionId) throws SIPersistenceException;
+    public void deleteTransaction(int transactionId);
     
-    public void updateTransaction(Transaction transaction) throws SIPersistenceException;
+    public void updateTransaction(Transaction transaction);
     
-    public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException;
+    public Transaction getTransactionByTransactionId(int transactionId);
     
-    public List<Transaction> getAllTransactions() throws SIPersistenceException;
+    public List<Transaction> getAllTransactions();
     
     
 }

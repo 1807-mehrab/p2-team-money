@@ -31,7 +31,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     }
 
     @Override
-    public void addAccount(Account account) throws SIPersistenceException {
+    public void addAccount(Account account) {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.save(account);
@@ -39,7 +39,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     }
 
     @Override
-    public void deleteAccount(int accountId) throws SIPersistenceException {
+    public void deleteAccount(int accountId) {
         Account account = getAccountByAccountId(accountId);
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -48,7 +48,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     }
 
     @Override
-    public void updateAccount(Account account) throws SIPersistenceException {
+    public void updateAccount(Account account) {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.save(account);
@@ -56,7 +56,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     }
 
     @Override
-    public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
+    public Account getAccountByAccountId(int accountId) {
         Account a = null;
         List<Account> accounts = new ArrayList<Account>();
         Session s = sessionFactory.getCurrentSession();
@@ -70,7 +70,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
     }
 
     @Override
-    public List<Account> getAllAccounts() throws SIPersistenceException {
+    public List<Account> getAllAccounts() {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Account").list();
     }

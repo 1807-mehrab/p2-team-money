@@ -33,7 +33,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@ComponentScan("com.revature.stockinvestment")
+@ComponentScan("com.revature")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class HibernateConfig extends WebMvcConfigurerAdapter {
@@ -55,7 +55,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(myDataSource());
-        sessionFactory.setPackagesToScan(new String[]{"com.revature.stockinvestment"});
+        sessionFactory.setPackagesToScan(new String[]{"com.revature"});
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -65,6 +65,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
             {
                 setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
                 setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+                setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
             }
         };
     }
@@ -77,14 +78,14 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
         return tm;
     }
 
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-        internalResourceViewResolver.setViewClass(JstlView.class);
-        internalResourceViewResolver.setPrefix("/WEB-INF/");
-        internalResourceViewResolver.setSuffix(".html");
-        return internalResourceViewResolver;
-    }
+//    @Bean
+//    public ViewResolver viewResolver() {
+//        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+//        internalResourceViewResolver.setViewClass(JstlView.class);
+//        internalResourceViewResolver.setPrefix("/WEB-INF/");
+//        internalResourceViewResolver.setSuffix(".html");
+//        return internalResourceViewResolver;
+//    }
 
     //***********************/
     // Account

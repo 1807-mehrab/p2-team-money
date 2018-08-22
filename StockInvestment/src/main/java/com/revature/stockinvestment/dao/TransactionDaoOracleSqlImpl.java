@@ -30,7 +30,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
 	//***************************************
 	
     @Override
-    public void addTransaction(Transaction transaction) throws SIPersistenceException {
+    public void addTransaction(Transaction transaction) {
         Session s = sessionFactory.getCurrentSession();
         org.hibernate.Transaction t = s.beginTransaction();
         s.save(transaction);
@@ -38,7 +38,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     }
 
     @Override
-    public void deleteTransaction(int transactionId) throws SIPersistenceException {
+    public void deleteTransaction(int transactionId) {
     	Transaction transaction = getTransactionByTransactionId(transactionId);
     	Session s = sessionFactory.getCurrentSession();
     	org.hibernate.Transaction t = s.beginTransaction();
@@ -47,7 +47,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     }
 
     @Override
-    public void updateTransaction(Transaction transaction) throws SIPersistenceException {
+    public void updateTransaction(Transaction transaction) {
     	Session s = sessionFactory.getCurrentSession();
     	org.hibernate.Transaction t = s.beginTransaction();
     	s.save(transaction);
@@ -55,7 +55,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     }
 
     @Override
-    public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
+    public Transaction getTransactionByTransactionId(int transactionId) {
     	Transaction transaction = null;
     	List<Transaction> transactions = new ArrayList<Transaction>();
     	Session s = sessionFactory.getCurrentSession();
@@ -68,7 +68,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     }
 
     @Override
-    public List<Transaction> getAllTransactions() throws SIPersistenceException {
+    public List<Transaction> getAllTransactions() {
     	Session s = sessionFactory.getCurrentSession();
     	return s.createQuery("from Transaction").list();
     }
