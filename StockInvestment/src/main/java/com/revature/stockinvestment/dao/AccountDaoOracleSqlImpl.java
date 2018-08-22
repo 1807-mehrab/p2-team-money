@@ -21,7 +21,7 @@ import com.revature.stockinvestment.model.Account;
  * @author James
  */
 @Repository
-public class AccountDaoOracleSqlImpl implements AccountDao { 
+public class AccountDaoOracleSqlImpl { 
     
 	private SessionFactory sessionFactory;
 
@@ -29,7 +29,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
 		this.sessionFactory = sessionFactory;
 	}
     
-    @Override
+    //@Override
     public void addAccount(Account account) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -37,7 +37,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
+    //@Override
     public void deleteAccount(int accountId) throws SIPersistenceException {
     	Account account = getAccountByAccountId(accountId);
         Session s = sessionFactory.getCurrentSession();
@@ -46,7 +46,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
+    //@Override
     public void updateAccount(Account account) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -54,7 +54,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         t.commit();
     }
 
-    @Override
+    //@Override
     public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
         Account a = null;
         List<Account> accounts = new ArrayList<Account>();
@@ -68,7 +68,7 @@ public class AccountDaoOracleSqlImpl implements AccountDao {
         return a;
     }
 
-    @Override
+    //@Override
     public List<Account> getAllAccounts() throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Account").list();

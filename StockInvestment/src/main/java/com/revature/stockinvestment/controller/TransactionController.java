@@ -5,9 +5,10 @@
  */
 package com.revature.stockinvestment.controller;
 
-import com.revature.stockinvestment.service.TransactionServiceLayer;
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 
 /**
  *
@@ -15,8 +16,12 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class TransactionController {
-    
-    private TransactionServiceLayer transactionServiceLayer;
+    @Autowired
+    private TransactionServiceLayerImpl transactionServiceLayer;
+
+	public void setTransactionServiceLayer(TransactionServiceLayerImpl transactionServiceLayer) {
+		this.transactionServiceLayer = transactionServiceLayer;
+	}
     
     
     

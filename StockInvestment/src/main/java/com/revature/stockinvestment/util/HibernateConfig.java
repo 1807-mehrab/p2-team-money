@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.MemberDao;
+
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
-import com.revature.stockinvestment.service.MemberServiceLayer;
+
 import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 import com.revature.stockinvestment.service.TransactionServiceLayerImpl;
 import org.springframework.web.servlet.ViewResolver;
@@ -93,14 +93,14 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 	//***********************/
 	// Account
 	//***********************/
-	@Bean
+    @Bean
 	public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
 		AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
 		dao.setSessionFactory(sessionFactory);
 		return dao;
 	}
 	
-	@Bean
+	//@Bean
 	public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
 		AccountServiceLayerImpl as = new AccountServiceLayerImpl();
 		as.setDao(accountDao);
@@ -119,7 +119,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 		return dao;
 	}
 
-	@Bean
+	//@Bean
 	public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
 		CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
 		cs.setDao(companyDao);
@@ -136,7 +136,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 		return dao;
 	}
 	
-	@Bean
+	//@Bean
 	public MemberServiceLayerImpl memberService(MemberDaoOracleSqlImpl memberDao) {
 		MemberServiceLayerImpl ms = new MemberServiceLayerImpl();
 		ms.setDao(memberDao);
@@ -153,7 +153,7 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 		return dao;
 	}
 	
-	@Bean
+	//@Bean
 	public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao, AccountDaoOracleSqlImpl accountDao, CompanyDaoOracleSqlImpl companyDao) {
 		TransactionServiceLayerImpl ts = new TransactionServiceLayerImpl();
 		ts.setTDao(transactionDao);

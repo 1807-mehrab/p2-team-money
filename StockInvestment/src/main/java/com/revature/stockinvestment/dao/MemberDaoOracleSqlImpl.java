@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 @Repository
-public class MemberDaoOracleSqlImpl implements MemberDao {
+public class MemberDaoOracleSqlImpl {
 
     //***************************************
 	private SessionFactory sessionFactory;
@@ -34,7 +34,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
 	//***************************************
 
 
-    @Override
+  
     public void addMember(Member member) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction tx = s.beginTransaction();
@@ -42,7 +42,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         tx.commit();
     }
 
-    @Override
+   
     public void deleteMember(int memberId) throws SIPersistenceException {
         Member member = getMemberByMemberId(memberId);
         Session s = sessionFactory.getCurrentSession();
@@ -51,7 +51,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         t.commit();
     }
 
-    @Override
+   
     public void updateMember(Member member) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -59,7 +59,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         t.commit();
     }
 
-    @Override
+    
     public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
         Member m = null;
         List<Member> members = new ArrayList<Member>();
@@ -72,7 +72,7 @@ public class MemberDaoOracleSqlImpl implements MemberDao {
         return m;
     }
 
-    @Override
+    
     public List<Member> getAllMembers() throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Member").list();
