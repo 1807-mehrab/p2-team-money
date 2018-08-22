@@ -5,37 +5,31 @@
  */
 package com.revature.stockinvestment.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
-import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
 import com.revature.stockinvestment.model.Transaction;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author James
  */
 @Service
+
 public class TransactionServiceLayerImpl { //implements TransactionServiceLayer {
 
-	@Autowired
-	private TransactionDaoOracleSqlImpl transactionDao;
-	
-	@Autowired
-	private AccountDaoOracleSqlImpl accountDao;
-	
-	@Autowired
-	private CompanyDaoOracleSqlImpl companyDao;
+public class TransactionServiceLayerImpl {
 
-	public void setTDao(TransactionDaoOracleSqlImpl dao) {
-		this.transactionDao = dao;
-	}
+
+    @Autowired
+    private TransactionDaoOracleSqlImpl transactionDao;
     
+    public void setTransactionDao(TransactionDaoOracleSqlImpl transactionDao) {
+        this.transactionDao = transactionDao;
+    }
+    
+
 	public void setADao(AccountDaoOracleSqlImpl dao) {
 		this.accountDao = dao;
 	}
@@ -75,6 +69,26 @@ public class TransactionServiceLayerImpl { //implements TransactionServiceLayer 
     	t.setCompany(companyDao.getCompanyByName(companyname));
     	t.setPurchasePrice(purchaseprice);
     	t.setShares(shares);
+
+    public void addTransaction(Transaction transaction) {
+        transactionDao.addTransaction(transaction);
+    }
+
+    public void deleteTransaction(int transactionId) {
+        transactionDao.deleteTransaction(transactionId);
+    }
+
+    public void updateTransaction(Transaction transaction) {
+        transactionDao.updateTransaction(transaction);
+    }
+
+    public Transaction getTransactionByTransactionId(int transactionId) {
+        return transactionDao.getTransactionByTransactionId(transactionId);
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionDao.getAllTransactions();
+
     }
     
 }

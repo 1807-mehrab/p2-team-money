@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class TransactionDaoOracleSqlImpl {
+
     
 	//***************************************
 	private SessionFactory sessionFactory;
@@ -31,11 +32,22 @@ public class TransactionDaoOracleSqlImpl {
 	
    
     public void addTransaction(Transaction transaction) throws SIPersistenceException {
+
+
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void addTransaction(Transaction transaction) {
+
         Session s = sessionFactory.getCurrentSession();
         org.hibernate.Transaction t = s.beginTransaction();
         s.save(transaction);
         t.commit();
     }
+
 
 
     public void deleteTransaction(int transactionId) throws SIPersistenceException {
@@ -71,6 +83,38 @@ public class TransactionDaoOracleSqlImpl {
     public List<Transaction> getAllTransactions() throws SIPersistenceException {
     	Session s = sessionFactory.getCurrentSession();
     	return s.createQuery("from Transaction").list();
+
+    public void deleteTransaction(int transactionId) {
+        Transaction transaction = getTransactionByTransactionId(transactionId);
+        Session s = sessionFactory.getCurrentSession();
+        org.hibernate.Transaction t = s.beginTransaction();
+        s.delete(transaction);
+        t.commit();
     }
-    
+
+    public void updateTransaction(Transaction transaction) {
+        Session s = sessionFactory.getCurrentSession();
+        org.hibernate.Transaction t = s.beginTransaction();
+        s.save(transaction);
+        t.commit();
+    }
+
+    public Transaction getTransactionByTransactionId(int transactionId) {
+        Transaction transaction = null;
+        List<Transaction> transactions = new ArrayList<Transaction>();
+        Session s = sessionFactory.getCurrentSession();
+        transactions = s.createQuery("from Transaction where transaction_id = :tId")
+                .setInteger("tId", transactionId).list();
+        if (!transactions.isEmpty()) {
+            transaction = transactions.get(0);
+        }
+        return transaction;
+    }
+
+    public List<Transaction> getAllTransactions() {
+        Session s = sessionFactory.getCurrentSession();
+        return s.createQuery("from Transaction").list();
+
+    }
+
 }
