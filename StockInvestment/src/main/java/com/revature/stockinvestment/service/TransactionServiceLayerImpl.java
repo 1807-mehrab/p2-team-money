@@ -21,7 +21,7 @@ import com.revature.stockinvestment.model.Transaction;
  * @author James
  */
 @Service
-public class TransactionServiceLayerImpl implements TransactionServiceLayer {
+public class TransactionServiceLayerImpl { //implements TransactionServiceLayer {
 
 	@Autowired
 	private TransactionDaoOracleSqlImpl transactionDao;
@@ -43,27 +43,27 @@ public class TransactionServiceLayerImpl implements TransactionServiceLayer {
 	public void setCDao(CompanyDaoOracleSqlImpl dao) {
 		this.companyDao = dao;
 	}
-    @Override
+    //@Override
     public void addTransaction(Transaction transaction) throws SIPersistenceException {
         transactionDao.addTransaction(transaction);
     }
 
-    @Override
+    //@Override
     public void deleteTransaction(int transactionId) throws SIPersistenceException {
         transactionDao.deleteTransaction(transactionId);
     }
 
-    @Override
+    //@Override
     public void updateTransaction(Transaction transaction) throws SIPersistenceException {
         transactionDao.updateTransaction(transaction);
     }
 
-    @Override
+    //@Override
     public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
         return transactionDao.getTransactionByTransactionId(transactionId);
     }
 
-    @Override
+    //@Override
     public List<Transaction> getAllTransactions() throws SIPersistenceException {
 
     	return transactionDao.getAllTransactions();

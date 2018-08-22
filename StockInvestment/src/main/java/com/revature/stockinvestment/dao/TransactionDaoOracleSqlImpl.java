@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * @author James
  */
 @Repository
-public class TransactionDaoOracleSqlImpl implements TransactionDao {
+public class TransactionDaoOracleSqlImpl {
     
 	//***************************************
 	private SessionFactory sessionFactory;
@@ -29,7 +29,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
 	}
 	//***************************************
 	
-    @Override
+   
     public void addTransaction(Transaction transaction) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         org.hibernate.Transaction t = s.beginTransaction();
@@ -37,7 +37,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
         t.commit();
     }
 
-    @Override
+
     public void deleteTransaction(int transactionId) throws SIPersistenceException {
     	Transaction transaction = getTransactionByTransactionId(transactionId);
     	Session s = sessionFactory.getCurrentSession();
@@ -46,7 +46,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     	t.commit();
     }
 
-    @Override
+    
     public void updateTransaction(Transaction transaction) throws SIPersistenceException {
     	Session s = sessionFactory.getCurrentSession();
     	org.hibernate.Transaction t = s.beginTransaction();
@@ -54,7 +54,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     	t.commit();
     }
 
-    @Override
+    
     public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
     	Transaction transaction = null;
     	List<Transaction> transactions = new ArrayList<Transaction>();
@@ -67,7 +67,7 @@ public class TransactionDaoOracleSqlImpl implements TransactionDao {
     	return transaction;
     }
 
-    @Override
+    
     public List<Transaction> getAllTransactions() throws SIPersistenceException {
     	Session s = sessionFactory.getCurrentSession();
     	return s.createQuery("from Transaction").list();

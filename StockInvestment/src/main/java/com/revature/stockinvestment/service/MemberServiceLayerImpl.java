@@ -18,7 +18,7 @@ import com.revature.stockinvestment.model.Member;
  * @author James
  */
 @Service
-public class MemberServiceLayerImpl implements MemberServiceLayer { 
+public class MemberServiceLayerImpl { //implements MemberServiceLayer { 
 
     private MemberDaoOracleSqlImpl memberDao;
      
@@ -26,27 +26,27 @@ public class MemberServiceLayerImpl implements MemberServiceLayer {
 		this.memberDao = dao;
 	}
     
-    @Override
+    //@Override
     public void addMember(Member member) throws SIPersistenceException {
         memberDao.addMember(member);
     }
 
-    @Override
+    //@Override
     public void deleteMember(int memberId) throws SIPersistenceException {
         memberDao.deleteMember(memberId);
     }
 
-    @Override
+    //@Override
     public void updateMember(Member member) throws SIPersistenceException {
         memberDao.updateMember(member);
     }
 
-    @Override
+    //@Override
     public Member getMemberByMemberId(int memberId) throws SIPersistenceException {
         return memberDao.getMemberByMemberId(memberId);
     }
 
-    @Override
+    //@Override
     public List<Member> getAllMembers() throws SIPersistenceException {
         return memberDao.getAllMembers();
     }
