@@ -15,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Entity
 @Table
-public class Transaction {
+public class Exchange {
     @Id
-    @Column(name="TRANSACTION_ID")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="tranSeq")
-    @SequenceGenerator(allocationSize=1, name="tranSeq", sequenceName="SQ_TRANSACTION_PK")
-    private int transactionId;
+    @Column(name="EXCHANGE_ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="exchSeq")
+    @SequenceGenerator(allocationSize=1, name="exchSeq", sequenceName="SQ_EXCHANGE_PK")
+    private int exchangeId;
     
     @Column(name="SHARES")
     private int shares;
@@ -30,20 +30,20 @@ public class Transaction {
     
     @Autowired
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="TRANSACTION_ACCOUNT")
+    @JoinColumn(name="EXCHANGE_ACCOUNT")
     private Account account;
     
     @Autowired
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="TRANSACTION_COMPANY")
+    @JoinColumn(name="EXCHANGE_COMPANY")
     private Company company;
 
-    public int getTransactionId() {
-        return transactionId;
+    public int getExchangeId() {
+        return exchangeId;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public void setExchangeId(int exchangeId) {
+        this.exchangeId = exchangeId;
     }
 
     public int getShares() {
@@ -77,5 +77,5 @@ public class Transaction {
     public void setCompany(Company company) {
         this.company = company;
     }
-    
+
 }
