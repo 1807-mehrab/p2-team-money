@@ -38,48 +38,45 @@ import org.springframework.web.servlet.view.JstlView;
 @PropertySource("classpath:application.properties")
 public class HibernateConfig extends WebMvcConfigurerAdapter {
 
-	@Autowired
-	private Environment env;
+    @Autowired
+    private Environment env;
 
-	@Bean
-	public DataSource myDataSource() {
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.username"));
-		dataSource.setPassword(env.getProperty("jdbc.password"));
+    @Bean
+    public DataSource myDataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
+        return dataSource;
+    }
 
-		return dataSource;
-	}
+    @Bean
+    public LocalSessionFactoryBean sessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(myDataSource());
+        sessionFactory.setPackagesToScan(new String[]{"com.revature.stockinvestment"});
+        sessionFactory.setHibernateProperties(hibernateProperties());
+        return sessionFactory;
+    }
 
-	@Bean
-	public LocalSessionFactoryBean sessionFactory() {
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(myDataSource());
-		sessionFactory.setPackagesToScan(new String[] { "com.revature.stockinvestment" });
-		sessionFactory.setHibernateProperties(hibernateProperties());
+    Properties hibernateProperties() {
+        return new Properties() {
+            {
+                setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+                setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+            }
+        };
+    }
 
-		return sessionFactory;
-	}
+    @Bean
+    @Autowired
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager tm = new HibernateTransactionManager();
+        tm.setSessionFactory(sessionFactory);
+        return tm;
+    }
 
-	Properties hibernateProperties() {
-		return new Properties() {
-			{
-				setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-				setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-			}
-		};
-	}
-	
-	@Bean
-	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-		HibernateTransactionManager tm = new HibernateTransactionManager();
-		tm.setSessionFactory(sessionFactory);
-		
-		return tm;
-	}
-	
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -88,6 +85,69 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
         internalResourceViewResolver.setSuffix(".html");
         return internalResourceViewResolver;
     }
+<<<<<<< HEAD
+
+    //***********************/
+    // Account
+    //***********************/
+//    @Bean
+//    public AccountDaoOracleSqlImpl accountDaoOracleSqlImpl(SessionFactory sessionFactory) {
+//        AccountDaoOracleSqlImpl dao = new AccountDaoOracleSqlImpl();
+//        dao.setSessionFactory(sessionFactory);
+//        return dao;
+//    }
+//
+//    @Bean
+//    public AccountServiceLayerImpl accountService(AccountDaoOracleSqlImpl accountDao) {
+//        return new AccountServiceLayerImpl(accountDao);
+//    }
+
+    //***********************/
+    // Company
+    //***********************/
+//    @Bean
+//    public CompanyDaoOracleSqlImpl companyDaoOracleSqlImpl(SessionFactory sessionFactory) {
+//        CompanyDaoOracleSqlImpl dao = new CompanyDaoOracleSqlImpl();
+//        dao.setSessionFactory(sessionFactory);
+//        return dao;
+//    }
+//
+//    @Bean
+//    public CompanyServiceLayerImpl companyService(CompanyDaoOracleSqlImpl companyDao) {
+//        CompanyServiceLayerImpl cs = new CompanyServiceLayerImpl();
+//        cs.setDao(companyDao);
+//        return cs;
+//    }
+
+    //***********************/
+    // Member
+    //***********************/
+//    @Bean
+//    public MemberDao memberDao(SessionFactory sessionFactory) {
+//        return new MemberDaoOracleSqlImpl(sessionFactory);
+//    }
+//
+//    @Bean
+//    public MemberServiceLayer memberService(MemberDao memberDao) {
+//        return new MemberServiceLayerImpl(memberDao);
+//    }
+
+    //***********************/
+    // Transaction
+    //***********************/
+    @Bean
+    public TransactionDaoOracleSqlImpl transactionDaoOracleSqlImpl(SessionFactory sessionFactory) {
+        TransactionDaoOracleSqlImpl dao = new TransactionDaoOracleSqlImpl();
+        dao.setSessionFactory(sessionFactory);
+        return dao;
+    }
+
+    @Bean
+    public TransactionServiceLayerImpl transactionService(TransactionDaoOracleSqlImpl transactionDao) {
+        return new TransactionServiceLayerImpl(transactionDao);
+    }
+
+=======
 	
 	
 	//***********************/
@@ -162,9 +222,9 @@ public class HibernateConfig extends WebMvcConfigurerAdapter {
 		return ts;
 	}
 	
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
 }

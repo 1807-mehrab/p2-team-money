@@ -5,6 +5,14 @@
  */
 package com.revature.stockinvestment.service;
 
+<<<<<<< HEAD
+import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
+import com.revature.stockinvestment.dao.SIPersistenceException;
+import com.revature.stockinvestment.model.Account;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+=======
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Account;
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
 
 /**
  *
@@ -21,6 +30,17 @@ import com.revature.stockinvestment.model.Account;
 @Service
 public class AccountServiceLayerImpl {
 
+<<<<<<< HEAD
+    @Autowired
+    private AccountDaoOracleSqlImpl accountDao;
+    
+    
+    public AccountServiceLayerImpl(AccountDaoOracleSqlImpl accountDao) {
+        this.accountDao = accountDao;
+    }
+    
+    @Override
+=======
 	@Autowired
     private AccountDaoOracleSqlImpl accountDao;
        
@@ -29,6 +49,7 @@ public class AccountServiceLayerImpl {
 	}
         
     //@Override
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
     public void addAccount(Account account) throws SIPersistenceException { 
         accountDao.addAccount(account);
     }

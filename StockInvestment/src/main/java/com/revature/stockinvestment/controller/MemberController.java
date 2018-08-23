@@ -1,10 +1,18 @@
 package com.revature.stockinvestment.controller;
 
+<<<<<<< HEAD
+import com.revature.stockinvestment.dao.SIPersistenceException;
+import com.revature.stockinvestment.model.Member;
+import com.revature.stockinvestment.service.MemberServiceLayerImpl;
+import java.util.List;
+import javax.validation.Valid;
+=======
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +30,11 @@ import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 
 @RestController
 public class MemberController {
+<<<<<<< HEAD
+    
+    @Autowired
+    private MemberServiceLayerImpl memberServiceLayer;
+=======
 	
 	@Autowired
     private MemberServiceLayerImpl memberServiceLayer;
@@ -30,6 +43,7 @@ public class MemberController {
     public MemberController(MemberServiceLayerImpl memberServiceLayer) {
         this.memberServiceLayer = memberServiceLayer;
     }
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
 
     @PostMapping("/member")
     @ResponseStatus(HttpStatus.CREATED)

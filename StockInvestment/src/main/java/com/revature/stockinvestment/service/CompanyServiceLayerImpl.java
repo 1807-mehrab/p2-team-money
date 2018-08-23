@@ -5,19 +5,19 @@
  */
 package com.revature.stockinvestment.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
+import java.util.List;
+import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author James
  */
+@Transactional
 @Repository
 public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 
@@ -28,30 +28,30 @@ public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 		this.dao = dao;
 	}
 	
-	//@Transactional
+	@Transactional
 	public void addCompanyStock(Company companyStock) throws SIPersistenceException {
 		dao.addCompanyStock(companyStock);
 		
 	}
 
-	//@Transactional
+	@Transactional
 	public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
 		dao.deleteCompanyStock(companyStockId);
 		
 	}
 
-	//@Transactional
+	@Transactional
 	public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
 		dao.updateCompanyStock(companyStock);
 		
 	}
 
-	//@Transactional
+	@Transactional
 	public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
 		return dao.getCompanyStockByCompanyStockId(companyStockId);
 	}
 
-	//@Transactional
+	@Transactional
 	public List<Company> getAllCompanyStocks() throws SIPersistenceException {
 		return dao.getAllCompanyStocks();
 	}

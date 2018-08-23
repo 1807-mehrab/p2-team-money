@@ -17,7 +17,11 @@ import com.revature.stockinvestment.service.AccountServiceLayerImpl;
 @RestController
 public class AccountController {
 	
+<<<<<<< HEAD
+    @Autowired //TODO: Review Autowiring
+=======
 	@Autowired //TODO: Review Autowiring
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
     private AccountServiceLayerImpl accountServiceLayer;
 	
 	
