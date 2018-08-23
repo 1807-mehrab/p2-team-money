@@ -28,7 +28,7 @@ public class Account {
 
     @Autowired
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    @JoinColumn(name = "ACCOUNT_MEMBER")
     private Member member;
 
     public int getAccountId() {

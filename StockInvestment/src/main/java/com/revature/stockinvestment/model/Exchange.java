@@ -6,6 +6,7 @@
 package com.revature.stockinvestment.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,17 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author James
  */
 @Entity
-@Table
+@Table(name = "EXCHANGE")
 public class Exchange {
+    
     @Id
-    @Column(name="EXCHANGE_ID")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="exchSeq")
     @SequenceGenerator(allocationSize=1, name="exchSeq", sequenceName="SQ_EXCHANGE_PK")
+    @Column(name="EXCHANGE_ID")
     private int exchangeId;
     
+    @Min(0)
     @Column(name="SHARES")
     private int shares;
     
+    @Min(0)
     @Column(name="PURCHASE_PRICE")
     private double purchasePrice;
     
