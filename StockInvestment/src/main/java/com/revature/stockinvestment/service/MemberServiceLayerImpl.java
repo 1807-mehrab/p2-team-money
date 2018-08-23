@@ -5,14 +5,13 @@
  */
 package com.revature.stockinvestment.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 /**
  *
