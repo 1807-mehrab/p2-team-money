@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author James
  */
 @Service
-public class TransactionServiceLayerImpl implements TransactionServiceLayer {
+public class TransactionServiceLayerImpl { //implements TransactionServiceLayer {
 
     private TransactionDao transactionDao;
     
@@ -26,27 +26,38 @@ public class TransactionServiceLayerImpl implements TransactionServiceLayer {
         this.transactionDao = transactionDao;
     }
     
+<<<<<<< HEAD
     @Override
+=======
+	public void setADao(AccountDaoOracleSqlImpl dao) {
+		this.accountDao = dao;
+	}
+	
+	public void setCDao(CompanyDaoOracleSqlImpl dao) {
+		this.companyDao = dao;
+	}
+    //@Override
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
     public void addTransaction(Transaction transaction) throws SIPersistenceException {
         transactionDao.addTransaction(transaction);
     }
 
-    @Override
+    //@Override
     public void deleteTransaction(int transactionId) throws SIPersistenceException {
         transactionDao.deleteTransaction(transactionId);
     }
 
-    @Override
+    //@Override
     public void updateTransaction(Transaction transaction) throws SIPersistenceException {
         transactionDao.updateTransaction(transaction);
     }
 
-    @Override
+    //@Override
     public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
         return transactionDao.getTransactionByTransactionId(transactionId);
     }
 
-    @Override
+    //@Override
     public List<Transaction> getAllTransactions() throws SIPersistenceException {
         return transactionDao.getAllTransactions();
     }

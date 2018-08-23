@@ -1,5 +1,6 @@
 package com.revature.stockinvestment.controller;
 
+<<<<<<< HEAD
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
 import javax.inject.Inject;
@@ -16,6 +17,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+=======
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.revature.stockinvestment.dao.SIPersistenceException;
+import com.revature.stockinvestment.model.Company;
+import com.revature.stockinvestment.service.CompanyServiceLayerImpl;
+>>>>>>> d1ab951f8bebd4aed32c5509e38bd91f76073197
 
 @RestController
 public class CompanyController {

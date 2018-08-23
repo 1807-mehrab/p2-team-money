@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 
-public class CompanyDaoOracleSqlImpl implements CompanyDao { 
+public class CompanyDaoOracleSqlImpl { 
     
     //***************************************
 	private SessionFactory sessionFactory;
@@ -31,7 +31,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
 	}
 	//***************************************
     
-    @Override
+
     public void addCompanyStock(Company companyStock) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -39,7 +39,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         t.commit();
     }
 
-    @Override
+    
     public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
         Company companyStock = getCompanyStockByCompanyStockId(companyStockId);
     	Session s = sessionFactory.getCurrentSession();
@@ -48,7 +48,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         t.commit();
     }
 
-    @Override
+    
     public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -56,7 +56,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         t.commit();
     }
 
-    @Override
+    
     public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
         Company c = null;
         List<Company> companies = new ArrayList<Company>();
@@ -72,7 +72,7 @@ public class CompanyDaoOracleSqlImpl implements CompanyDao {
         return c;
     }
 
-    @Override
+    
     public List<Company> getAllCompanyStocks() throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from company").list();
