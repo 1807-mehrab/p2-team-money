@@ -1,0 +1,9 @@
+/StockInvestment/target/
+.settings
+.project
+classpath
+.classpath
+nb-configuration.xml
+target/
+bin/
+connection.properties
