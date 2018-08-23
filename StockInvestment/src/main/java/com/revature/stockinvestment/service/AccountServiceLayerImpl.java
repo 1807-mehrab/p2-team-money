@@ -28,27 +28,22 @@ public class AccountServiceLayerImpl {
         this.accountDao = dao;
     }
 
-    //@Override
     public void addAccount(Account account) throws SIPersistenceException {
         accountDao.addAccount(account);
     }
 
-    //@Override
     public void deleteAccount(int accountId) throws SIPersistenceException {
         accountDao.deleteAccount(accountId);
     }
 
-    //@Override
     public void updateAccount(Account account) throws SIPersistenceException {
         accountDao.updateAccount(account);
     }
 
-    //@Override
     public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
         return accountDao.getAccountByAccountId(accountId);
     }
 
-    //@Override
     public List<Account> getAllAccounts() throws SIPersistenceException {
         return accountDao.getAllAccounts();
     }

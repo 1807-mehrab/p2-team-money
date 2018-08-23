@@ -16,19 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Entity
 @Table
 public class Account {
-    
-	@Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="accSeq")
-    @SequenceGenerator(allocationSize=1, name="accSeq", sequenceName="SQ_ACCOUNT_PK")
-	@Column(name="ACCOUNT_ID")
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "accSeq")
+    @SequenceGenerator(allocationSize = 1, name = "accSeq", sequenceName = "SQ_ACCOUNT_PK")
+    @Column(name = "ACCOUNT_ID")
     private int accountId;
-	
-	@Column(name="BALANCE")
+
+    @Column(name = "BALANCE")
     private double balance;
-	
-	@Autowired
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn
+
+    @Autowired
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Member member;
 
     public int getAccountId() {
@@ -54,5 +54,5 @@ public class Account {
     public void setMember(Member member) {
         this.member = member;
     }
-    
+
 }
