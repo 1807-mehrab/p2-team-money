@@ -21,15 +21,15 @@ import com.revature.stockinvestment.model.Account;
 @Service
 public class AccountServiceLayerImpl {
 
-	@Autowired
+    @Autowired
     private AccountDaoOracleSqlImpl accountDao;
-       
-	public void setDao(AccountDaoOracleSqlImpl dao) {
-		this.accountDao = dao;
-	}
-        
+
+    public void setDao(AccountDaoOracleSqlImpl dao) {
+        this.accountDao = dao;
+    }
+
     //@Override
-    public void addAccount(Account account) throws SIPersistenceException { 
+    public void addAccount(Account account) throws SIPersistenceException {
         accountDao.addAccount(account);
     }
 
@@ -52,5 +52,5 @@ public class AccountServiceLayerImpl {
     public List<Account> getAllAccounts() throws SIPersistenceException {
         return accountDao.getAllAccounts();
     }
-    
+
 }

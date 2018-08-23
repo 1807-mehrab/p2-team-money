@@ -8,51 +8,47 @@ package com.revature.stockinvestment.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.model.Company;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author James
  */
-@Repository
+@Service
 public class CompanyServiceLayerImpl /*implements CompanyServiceLayer*/ {
 
-	@Autowired
-	CompanyDaoOracleSqlImpl dao;
+    @Autowired
+    private CompanyDaoOracleSqlImpl companyDao;
 
-	public void setDao(CompanyDaoOracleSqlImpl dao) {
-		this.dao = dao;
-	}
-	
-	//@Transactional
-	public void addCompanyStock(Company companyStock) throws SIPersistenceException {
-		dao.addCompanyStock(companyStock);
-		
-	}
+    public void setDao(CompanyDaoOracleSqlImpl dao) {
+        this.companyDao = dao;
+    }
 
-	//@Transactional
-	public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-		dao.deleteCompanyStock(companyStockId);
-		
-	}
+    public void addCompany(Company company) throws SIPersistenceException {
+        companyDao.addCompany(company);
 
-	//@Transactional
-	public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
-		dao.updateCompanyStock(companyStock);
-		
-	}
+    }
 
-	//@Transactional
-	public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
-		return dao.getCompanyStockByCompanyStockId(companyStockId);
-	}
+    public void deleteCompany(int companyId) throws SIPersistenceException {
+        companyDao.deleteCompany(companyId);
 
-	//@Transactional
-	public List<Company> getAllCompanyStocks() throws SIPersistenceException {
-		return dao.getAllCompanyStocks();
-	}
+    }
+
+    public void updateCompany(Company company) throws SIPersistenceException {
+        companyDao.updateCompany(company);
+
+    }
+
+    public Company getCompanyByCompanyId(int companyId) throws SIPersistenceException {
+        return companyDao.getCompanyByCompanyId(companyId);
+    }
+
+    public List<Company> getAllCompanies() throws SIPersistenceException {
+        return companyDao.getAllCompanies();
+    }
+
 }
