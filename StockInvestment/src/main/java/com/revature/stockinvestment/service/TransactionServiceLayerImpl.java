@@ -14,7 +14,7 @@ import com.revature.stockinvestment.dao.AccountDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.CompanyDaoOracleSqlImpl;
 import com.revature.stockinvestment.dao.SIPersistenceException;
 import com.revature.stockinvestment.dao.TransactionDaoOracleSqlImpl;
-import com.revature.stockinvestment.model.Transaction;
+import com.revature.stockinvestment.model.Exchange;
 
 /**
  *
@@ -44,7 +44,7 @@ public class TransactionServiceLayerImpl { //implements TransactionServiceLayer 
         this.companyDao = dao;
     }
 
-    public void addTransaction(Transaction transaction) throws SIPersistenceException {
+    public void addTransaction(Exchange transaction) throws SIPersistenceException {
         transactionDao.addTransaction(transaction);
     }
 
@@ -52,20 +52,20 @@ public class TransactionServiceLayerImpl { //implements TransactionServiceLayer 
         transactionDao.deleteTransaction(transactionId);
     }
 
-    public void updateTransaction(Transaction transaction) throws SIPersistenceException {
+    public void updateTransaction(Exchange transaction) throws SIPersistenceException {
         transactionDao.updateTransaction(transaction);
     }
 
-    public Transaction getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
+    public Exchange getTransactionByTransactionId(int transactionId) throws SIPersistenceException {
         return transactionDao.getTransactionByTransactionId(transactionId);
     }
 
-    public List<Transaction> getAllTransactions() throws SIPersistenceException {
+    public List<Exchange> getAllTransactions() throws SIPersistenceException {
         return transactionDao.getAllTransactions();
     }
 
     public void createTransaction(int accountid, String companyname, int shares, double purchaseprice) throws SIPersistenceException {
-        Transaction t = new Transaction();
+        Exchange t = new Exchange();
         t.setAccount(accountDao.getAccountByAccountId(accountid));
         t.setCompany(companyDao.getCompanyByName(companyname));
         t.setPurchasePrice(purchaseprice);
