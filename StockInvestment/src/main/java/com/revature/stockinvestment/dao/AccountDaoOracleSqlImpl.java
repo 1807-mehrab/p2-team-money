@@ -14,11 +14,13 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.stockinvestment.model.Account;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author James
  */
+@Transactional
 @Repository
 public class AccountDaoOracleSqlImpl {
 
@@ -28,7 +30,6 @@ public class AccountDaoOracleSqlImpl {
         this.sessionFactory = sessionFactory;
     }
 
-    //@Override
     public void addAccount(Account account) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -36,7 +37,6 @@ public class AccountDaoOracleSqlImpl {
         t.commit();
     }
 
-    //@Override
     public void deleteAccount(int accountId) throws SIPersistenceException {
         Account account = getAccountByAccountId(accountId);
         Session s = sessionFactory.getCurrentSession();
@@ -45,7 +45,6 @@ public class AccountDaoOracleSqlImpl {
         t.commit();
     }
 
-    //@Override
     public void updateAccount(Account account) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
@@ -53,7 +52,6 @@ public class AccountDaoOracleSqlImpl {
         t.commit();
     }
 
-    //@Override
     public Account getAccountByAccountId(int accountId) throws SIPersistenceException {
         Account a = null;
         List<Account> accounts = new ArrayList<Account>();
@@ -63,11 +61,9 @@ public class AccountDaoOracleSqlImpl {
         if (!accounts.isEmpty()) {
             a = accounts.get(0);
         }
-
         return a;
     }
 
-    //@Override
     public List<Account> getAllAccounts() throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         return s.createQuery("from Account").list();
