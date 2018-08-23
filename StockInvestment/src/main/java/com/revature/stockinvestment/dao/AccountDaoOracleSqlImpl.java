@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import com.revature.stockinvestment.model.Account;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class AccountDaoOracleSqlImpl {
 
+    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
