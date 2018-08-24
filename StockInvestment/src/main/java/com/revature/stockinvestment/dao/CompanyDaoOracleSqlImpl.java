@@ -6,90 +6,83 @@
 package com.revature.stockinvestment.dao;
 
 import com.revature.stockinvestment.model.Company;
-import com.revature.stockinvestment.util.ConnectionUtil;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author James
  */
+@Transactional
 @Repository
+public class CompanyDaoOracleSqlImpl {
 
-public class CompanyDaoOracleSqlImpl { 
-    
-    //***************************************
-	private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	//***************************************
-    
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-    public void addCompanyStock(Company companyStock) throws SIPersistenceException {
+    public void addCompany(Company company) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
-        s.save(companyStock);
+        s.save(company);
         t.commit();
     }
 
-    
-    public void deleteCompanyStock(int companyStockId) throws SIPersistenceException {
-        Company companyStock = getCompanyStockByCompanyStockId(companyStockId);
-    	Session s = sessionFactory.getCurrentSession();
+    public void deleteCompany(int companyId) throws SIPersistenceException {
+        Company companyStock = getCompanyByCompanyId(companyId);
+        Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
         s.delete(companyStock);
         t.commit();
     }
 
-    
-    public void updateCompanyStock(Company companyStock) throws SIPersistenceException {
+    public void updateCompany(Company company) throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
         Transaction t = s.beginTransaction();
-        s.save(companyStock);
+        s.save(company);
         t.commit();
     }
 
-    
-    public Company getCompanyStockByCompanyStockId(int companyStockId) throws SIPersistenceException {
+    public Company getCompanyByCompanyId(int companyId) throws SIPersistenceException {
         Company c = null;
         List<Company> companies = new ArrayList<Company>();
         Session s = sessionFactory.getCurrentSession();
-        
         companies = s.createQuery("from Company where company_id = :cId")
-        		.setInteger("cId", companyStockId).list();
-        
-        if(!companies.isEmpty()) {
-        	c = companies.get(0);
+                .setInteger("cId", companyId).list();
+        if (!companies.isEmpty()) {
+            c = companies.get(0);
         }
-        
+
         return c;
     }
 
-    
-    public List<Company> getAllCompanyStocks() throws SIPersistenceException {
+    public List<Company> getAllCompanies() throws SIPersistenceException {
         Session s = sessionFactory.getCurrentSession();
-        return s.createQuery("from company").list();
+        return s.createQuery("from Company").list();
     }
-    
+
     public Company getCompanyByName(String companyname) throws SIPersistenceException {
         Company c = null;
         List<Company> companies = new ArrayList<Company>();
         Session s = sessionFactory.getCurrentSession();
-        
+
         companies = s.createQuery("from Company where company_name = :cName")
-        		.setString("cName", companyname).list();
-        
-        if(!companies.isEmpty()) {
-        	c = companies.get(0);
+                .setString("cName", companyname).list();
+
+        if (!companies.isEmpty()) {
+            c = companies.get(0);
         }
-        
+
         return c;
     }
 }

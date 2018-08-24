@@ -6,6 +6,7 @@
 package com.revature.stockinvestment.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,36 +15,39 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author James
  */
 @Entity
-@Table
-public class Transaction {
-    @Id
-    @Column(name="TRANSACTION_ID")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="tranSeq")
-    @SequenceGenerator(allocationSize=1, name="tranSeq", sequenceName="SQ_TRANSACTION_PK")
-    private int transactionId;
+@Table(name = "EXCHANGE")
+public class Exchange {
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="exchSeq")
+    @SequenceGenerator(allocationSize=1, name="exchSeq", sequenceName="SQ_EXCHANGE_PK")
+    @Column(name="EXCHANGE_ID")
+    private int exchangeId;
+    
+    @Min(0)
     @Column(name="SHARES")
     private int shares;
     
+    @Min(0)
     @Column(name="PURCHASE_PRICE")
     private double purchasePrice;
     
     @Autowired
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="TRANSACTION_ACCOUNT")
+    @JoinColumn(name="EXCHANGE_ACCOUNT")
     private Account account;
     
     @Autowired
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="TRANSACTION_COMPANY")
+    @JoinColumn(name="EXCHANGE_COMPANY")
     private Company company;
 
-    public int getTransactionId() {
-        return transactionId;
+    public int getExchangeId() {
+        return exchangeId;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public void setExchangeId(int exchangeId) {
+        this.exchangeId = exchangeId;
     }
 
     public int getShares() {
@@ -77,5 +81,5 @@ public class Transaction {
     public void setCompany(Company company) {
         this.company = company;
     }
-    
+
 }

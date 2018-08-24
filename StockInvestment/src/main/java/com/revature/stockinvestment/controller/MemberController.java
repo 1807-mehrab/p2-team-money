@@ -2,7 +2,6 @@ package com.revature.stockinvestment.controller;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,10 @@ import com.revature.stockinvestment.service.MemberServiceLayerImpl;
 
 @RestController
 public class MemberController {
-	
-	@Autowired
+
+    @Autowired
     private MemberServiceLayerImpl memberServiceLayer;
 
-    @Inject
     public MemberController(MemberServiceLayerImpl memberServiceLayer) {
         this.memberServiceLayer = memberServiceLayer;
     }
@@ -58,5 +56,5 @@ public class MemberController {
     public List<Member> getAllMembers() throws SIPersistenceException {
         return memberServiceLayer.getAllMembers();
     }
-    
+
 }
