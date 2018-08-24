@@ -7,6 +7,7 @@ package com.revature.stockinvestment.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.stockinvestment.dao.MemberDaoOracleSqlImpl;
@@ -20,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service
 public class MemberServiceLayerImpl { //implements MemberServiceLayer { 
-
-    @Autowired
+	
+	@Autowired
     private MemberDaoOracleSqlImpl memberDao;
 
     public void setDao(MemberDaoOracleSqlImpl dao) {
